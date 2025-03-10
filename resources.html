@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - KoreAmigo</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 리소스 페이지 특화 스타일 */
+        .resources-hero {
+            padding: 150px 0 80px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/resources-hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        .resources-hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .resources-hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .resource-categories {
+            padding: 80px 0;
+        }
+
+        .resource-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .resource-tab {
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .resource-tab:hover {
+            background-color: #e5e5e5;
+        }
+
+        .resource-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .resource-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .resource-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .resource-card:hover .resource-image img {
+            transform: scale(1.1);
+        }
+
+        .resource-content {
+            padding: 25px;
+        }
+
+        .resource-category {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: rgba(74, 144, 226, 0.1);
+            color: var(--primary-color);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .resource-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .resource-description {
+            color: var(--light-text);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--light-text);
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .resource-category-content {
+            display: none;
+        }
+
+        .resource-category-content.active {
+            display: block;
+        }
+
+        .search-section {
+            background-color: var(--light-bg);
+            padding: 80px 0;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+            padding-right: 50px;
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-box button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .popular-searches {
+            text-align: center;
+        }
+
+        .popular-searches h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .search-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .search-tag {
+            padding: 8px 15px;
+            background-color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-tag:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .subscribe-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .subscribe-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 40px;
+        }
+
+        .subscribe-container h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .subscribe-container p {
+            margin-bottom: 30px;
+            color: var(--light-text);
+        }
+
+        .subscribe-form {
+            display: flex;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .subscribe-form input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #eee;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .subscribe-form button {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .subscribe-form button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        @media screen and (max-width: 768px) {
+            .resource-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .resource-tab {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            
+            .subscribe-form {
+                flex-direction: column;
+            }
+            
+            .subscribe-form input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .subscribe-form button {
+                border-radius: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>KoreAmigo</h1>
+                </a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="resources.html" class="active">Resources</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="lang-selector">
+                    <button id="lang-selector-btn">
+                        <i class="fas fa-globe"></i> Language
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <div class="lang-option" data-lang="en">English</div>
+                        <div class="lang-option" data-lang="ko">한국어</div>
+                        <div class="lang-option" data-lang="zh">中文</div>
+                        <div class="lang-option" data-lang="ja">日本語</div>
+                        <div class="lang-option" data-lang="vi">Tiếng Việt</div>
+                        <div class="lang-option" data-lang="th">ไทย</div>
+                    </div>
+                </div>
+            </nav>
+            <div class="mobile-nav-toggle" id="mobile-nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="resources-hero">
+            <div class="container">
+                <h1 class="resources-hero-title">Helpful Resources</h1>
+                <p class="resources-hero-subtitle">Discover guides, tips, and information to make your time in Korea enjoyable and hassle-free.</p>
+            </div>
+        </section>
+
+        <section class="search-section">
+            <div class="container">
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="resource-search" placeholder="Search for resources...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    
+                    <div class="popular-searches">
+                        <h3>Popular Searches</h3>
+                        <div class="search-tags">
+                            <div class="search-tag">Visa Requirements</div>
+                            <div class="search-tag">Public Transportation</div>
+                            <div class="search-tag">Housing</div>
+                            <div class="search-tag">Korean Language</div>
+                            <div class="search-tag">Healthcare</div>
+                            <div class="search-tag">Banking</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="resource-categories">
+            <div class="container">
+                <h2 class="section-title">Browse by Category</h2>
+                
+                <div class="resource-tabs">
+                    <div class="resource-tab active" data-category="all">All Resources</div>
+                    <div class="resource-tab" data-category="guides">Practical Guides</div>
+                    <div class="resource-tab" data-category="language">Language Learning</div>
+                    <div class="resource-tab" data-category="culture">Culture & Lifestyle</div>
+                    <div class="resource-tab" data-category="travel">Travel Tips</div>
+                </div>
+                
+                <div class="resource-category-content active" id="all">
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <div class="resource-image">
+                                <img src="assets/images/resources/visa-guide.jpg" alt="Visa Guide">
+                            </div>
+                            <div class="resource-content">
+                                <span class="resource-category">Guides</span>
+                                <h3 class="resource-title">Complete Guide to Korean Visa Types</h3>
+                                <p class="resource-description">Learn about different visa types in Korea, application requirements, and which one is right for your situation.</p>
+                                <div class="resource-meta">
+                                    <span><i class="far fa-calendar"></i> May 15, 2025</span>
+                                    <span><i class="far fa-clock"></i> 12 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-card">
+                            <div class="resource-image">
+                                <img src="assets/images/resources/apartment-hunting.jpg" alt="Apartment Hunting">
+                            </div>
+                            <div class="resource-content">
+                                <span class="resource-category">Guides</span>
+                                <h3 class="resource-title">Apartment Hunting in Seoul: A Foreigner's Guide</h3>
+                                <p class="resource-description">Navigate the complex Korean housing market with tips on finding, renting, and setting up your new home in Seoul.</p>
+                                <div class="resource-meta">
+                                    <span><i class="far fa-calendar"></i> April 28, 2025</span>
+                                    <span><i class="far fa-clock"></i> 15 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-card">
+                            <div class="resource-image">
+                                <img src="assets/images/resources/korean-phrases.jpg" alt="Korean Phrases">
+                            </div>
+                            <div class="resource-content">
+                                <span class="resource-category">Language</span>
+                                <h3 class="resource-title">50 Essential Korean Phrases for Everyday Life</h3>
+                                <p class="resource-description">Master these key Korean phrases to navigate daily situations from ordering food to asking for directions.</p>
+                                <div class="resource-meta">
+                                    <span><i class="far fa-calendar"></i> May 5, 2025</span>
+                                    <span><i class="far fa-clock"></i> 10 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-card">
+                            <div class="resource-image">
+                                <img src="assets/images/resources/korean-etiquette.jpg" alt="Korean Etiquette">
+                            </div>
+                            <div class="resource-content">
+                                <span class="resource-category">Culture</span>
+                                <h3 class="resource-title">Korean Etiquette: Do's and Don'ts</h3>
+                                <p class="resource-description">Understand Korean social customs and avoid cultural faux pas with this comprehensive guide to local etiquette.</p>
+                                <div class="resource-meta">
+                                    <span><i class="far fa-calendar"></i> May 12, 2025</span>
+                                    <span><i class="far fa-clock"></i> 8 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-card">
+                            <div class="resource-image">
+                                <img src="assets/images/resources/subway-guide.jpg" alt="Subway Guide">
+                            </div>
+                            <div class="resource-content">
+                                <span class="resource-category">Travel</span>
+                                <h3 class="resource-title">Mastering Seoul's Subway System</h3>
+                                <p class="resource-description">A comprehensive guide to navigating Seoul's extensive subway network with tips, tricks, and essential Korean vocabulary.</p>
+                                <div class="resource-meta">
+                                    <span><i class="far fa-calendar"></i> April 20, 2025</span>
+                                    <span><i class="far fa-clock"></i> 11 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-card">
+                            <div class="resource-image">
+                                <img src="assets/images/resources/healthcare-system.jpg" alt="Healthcare System">
+                            </div>
+                            <div class="resource-content">
+                                <span class="resource-category">Guides</span>
+                                <h3 class="resource-title">Understanding the Korean Healthcare System</h3>
+                                <p class="resource-description">Learn how to access medical care, navigate health insurance, and find English-speaking doctors in Korea.</p>
+                                <div class="resource-meta">
+                                    <span><i class="far fa-calendar"></i> May 8, 2025</span>
+                                    <span><i class="far fa-clock"></i> 13 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-category-content" id="guides">
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <div class="resource-image">
+                                <img src="assets/images/resources/visa-guide.jpg" alt="Visa Guide">
+                            </div>
+                            <div class="resource-content">
+                                <span class="resource-category">Guides</span>
+                                <h3 class="resource-title">Complete Guide to Korean Visa Types</h3>
+                                <p class="resource-description">Learn about different visa types in Korea, application requirements, and which one is right for your situation.</p>
+                                <div class="resource-meta">
+                                    <span><i class="far fa-calendar"></i> May 15, 2025</span>
+                                    <span><i class="far fa-clock"></i> 12 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-card">
+                            <div class="resource-image">
+                                <img src="assets/images/resources/apartment-hunting.jpg" alt="Apartment Hunting">
+                            </div>
+                            <div class="resource-content">
+                                <span class="resource-category">Guides</span>
+                                <h3 class="resource-title">Apartment Hunting in Seoul: A Foreigner's Guide</h3>
+                                <p class="resource-description">Navigate the complex Korean housing market with tips on finding, renting, and setting up your new home in Seoul.</p>
+                                <div class="resource-meta">
+                                    <span><i class="far fa-calendar"></i> April 28, 2025</span>
+                                    <span><i class="far fa-clock"></i> 15 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-card">
+                            <div class="resource-image">
+                                <img src="assets/images/resources/healthcare-system.jpg" alt="Healthcare System">
+                            </div>
+                            <div class="resource-content">
+                                <span class="resource-category">Guides</span>
+                                <h3 class="resource-title">Understanding the Korean Healthcare System</h3>
+                                <p class="resource-description">Learn how to access medical care, navigate health insurance, and find English-speaking doctors in Korea.</p>
+                                <div class="resource-meta">
+                                    <span><i class="far fa-calendar"></i> May 8, 2025</span>
+                                    <span><i class="far fa-clock"></i> 13 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-category-content" id="language">
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <div class="resource-image">
+                                <img src="assets/images/resources/korean-phrases.jpg" alt="Korean Phrases">
+                            </div>
+                            <div class="resource-content">
+                                <span class="resource-category">Language</span>
+                                <h3 class="resource-title">50 Essential Korean Phrases for Everyday Life</h3>
+                                <p class="resource-description">Master these key Korean phrases to navigate daily situations from ordering food to asking for directions.</p>
+                                <div class="resource-meta">
+                                    <span><i class="far fa-calendar"></i> May 5, 2025</span>
+                                    <span><i class="far fa-clock"></i> 10 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-category-content" id="culture">
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <div class="resource-image">
+                                <img src="assets/images/resources/korean-etiquette.jpg" alt="Korean Etiquette">
+                            </div>
+                            <div class="resource-content">
+                                <span class="resource-category">Culture</span>
+                                <h3 class="resource-title">Korean Etiquette: Do's and Don'ts</h3>
+                                <p class="resource-description">Understand Korean social customs and avoid cultural faux pas with this comprehensive guide to local etiquette.</p>
+                                <div class="resource-meta">
+                                    <span><i class="far fa-calendar"></i> May 12, 2025</span>
+                                    <span><i class="far fa-clock"></i> 8 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-category-content" id="travel">
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <div class="resource-image">
+                                <img src="assets/images/resources/subway-guide.jpg" alt="Subway Guide">
+                            </div>
+                            <div class="resource-content">
+                                <span class="resource-category">Travel</span>
+                                <h3 class="resource-title">Mastering Seoul's Subway System</h3>
+                                <p class="resource-description">A comprehensive guide to navigating Seoul's extensive subway network with tips, tricks, and essential Korean vocabulary.</p>
+                                <div class="resource-meta">
+                                    <span><i class="far fa-calendar"></i> April 20, 2025</span>
+                                    <span><i class="far fa-clock"></i> 11 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="subscribe-section">
+            <div class="container">
+                <div class="subscribe-container">
+                    <h3>Stay Updated</h3>
+                    <p>Subscribe to our newsletter to receive the latest resources, guides, and tips for living in Korea.</p>
+                    <form class="subscribe-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>KoreAmigo</h2>
+                    <p>Your Friend in Korea</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 KoreAmigo. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Resource Category Tabs
+            const resourceTabs = document.querySelectorAll('.resource-tab');
+            const resourceContents = document.querySelectorAll('.resource-category-content');
+            
+            resourceTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    resourceTabs.forEach(tab => tab.classList.remove('active'));
+                    resourceContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    const category = tab.getAttribute('data-category');
+                    
+                    if (category === 'all') {
+                        document.getElementById('all').classList.add('active');
+                    } else {
+                        document.getElementById(category).classList.add('active');
+                    }
+                });
+            });
+            
+            // Search Functionality
+            const searchInput = document.getElementById('resource-search');
+            const resourceCards = document.querySelectorAll('.resource-card');
+            
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                
+                // Show all cards if search term is empty
+                if (searchTerm === '') {
+                    resourceTabs[0].click();
+                    return;
+                }
+                
+                // Show all Category Contents
+                resourceContents.forEach(content => content.classList.remove('active'));
+                document.getElementById('all').classList.add('active');
+                
+                // Reset tab highlighting
+                resourceTabs.forEach(tab => tab.classList.remove('active'));
+                resourceTabs[0].classList.add('active');
+                
+                // Filter cards based on search term
+                resourceCards.forEach(card => {
+                    const title = card.querySelector('.resource-title').textContent.toLowerCase();
+                    const description = card.querySelector('.resource-description').textContent.toLowerCase();
+                    const category = card.querySelector('.resource-category').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || description.includes(searchTerm) || category.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Popular Search Tags
+            const searchTags = document.querySelectorAll('.search-tag');
+            
+            searchTags.forEach(tag => {
+                tag.addEventListener('click', () => {
+                    searchInput.value = tag.textContent;
+                    // Trigger the input event to perform the search
+                    const event = new Event('input', { bubbles: true });
+                    searchInput.dispatchEvent(event);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

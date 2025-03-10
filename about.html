@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - KoreAmigo</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* About 페이지 특화 스타일 */
+        .about-hero {
+            padding: 150px 0 80px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/about-hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        .about-hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .about-hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .mission-vision {
+            padding: 80px 0;
+        }
+
+        .mission-vision-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .mission-vision-card {
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .mission-vision-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mission-vision-icon i {
+            font-size: 40px;
+            color: white;
+        }
+
+        .mission-vision-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .mission-vision-text {
+            color: var(--light-text);
+            line-height: 1.8;
+        }
+
+        .values-section {
+            padding: 80px 0;
+            background-color: var(--light-bg);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .value-card {
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .value-icon i {
+            font-size: 30px;
+            color: white;
+        }
+
+        .value-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .team-section {
+            padding: 80px 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .team-card {
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-photo {
+            height: 250px;
+            background-color: #ddd;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .team-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .team-position {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .team-bio {
+            color: var(--light-text);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .team-social a {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .team-social a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .timeline-section {
+            padding: 80px 0;
+            background-color: var(--light-bg);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 50px auto 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .timeline-left {
+            left: 0;
+        }
+
+        .timeline-right {
+            left: 50%;
+        }
+
+        .timeline-left::after {
+            right: -12.5px;
+        }
+
+        .timeline-right::after {
+            left: -12.5px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .timeline-title {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            .mission-vision-container {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-left::after, .timeline-right::after {
+                left: 18px;
+            }
+
+            .timeline-right {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>KoreAmigo</h1>
+                </a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html" class="active">About Us</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="lang-selector">
+                    <button id="lang-selector-btn">
+                        <i class="fas fa-globe"></i> Language
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <div class="lang-option" data-lang="en">English</div>
+                        <div class="lang-option" data-lang="ko">한국어</div>
+                        <div class="lang-option" data-lang="zh">中文</div>
+                        <div class="lang-option" data-lang="ja">日本語</div>
+                        <div class="lang-option" data-lang="vi">Tiếng Việt</div>
+                        <div class="lang-option" data-lang="th">ไทย</div>
+                    </div>
+                </div>
+            </nav>
+            <div class="mobile-nav-toggle" id="mobile-nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-hero">
+            <div class="container">
+                <h1 class="about-hero-title">About KoreAmigo</h1>
+                <p class="about-hero-subtitle">Your trusted companion for navigating life in Korea</p>
+            </div>
+        </section>
+
+        <section class="mission-vision">
+            <div class="container">
+                <h2 class="section-title">Our Mission & Vision</h2>
+                
+                <div class="mission-vision-container">
+                    <div class="mission-vision-card">
+                        <div class="mission-vision-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3 class="mission-vision-title">Our Mission</h3>
+                        <p class="mission-vision-text">
+                            To empower foreigners in Korea by providing comprehensive support services that break down language barriers, simplify administrative complexities, and foster cultural understanding, enabling them to navigate Korean society with confidence and ease.
+                        </p>
+                    </div>
+                    
+                    <div class="mission-vision-card">
+                        <div class="mission-vision-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="mission-vision-title">Our Vision</h3>
+                        <p class="mission-vision-text">
+                            To become the most trusted companion for all foreigners in Korea, creating a world where cultural and language differences are no longer obstacles but opportunities for growth and connection. We envision a Korea where every foreigner feels at home.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="values-section">
+            <div class="container">
+                <h2 class="section-title">Our Core Values</h2>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3 class="value-title">Empathy</h3>
+                        <p>We understand the challenges of navigating a foreign country and approach every situation with genuine care and understanding.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="value-title">Trust</h3>
+                        <p>We build lasting relationships based on reliability, honesty, and transparency in all our interactions.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="value-title">Innovation</h3>
+                        <p>We continuously seek new and better ways to solve problems and improve the experience of foreigners in Korea.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-globe-asia"></i>
+                        </div>
+                        <h3 class="value-title">Cultural Respect</h3>
+                        <p>We honor and celebrate cultural diversity while helping bridge gaps between different cultural perspectives.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="team-section">
+            <div class="container">
+                <h2 class="section-title">Our Team</h2>
+                <p class="text-center" style="max-width: 800px; margin: 0 auto 40px;">
+                    Our multilingual team consists of passionate professionals who understand the challenges of living abroad and are dedicated to making your Korean experience seamless and enjoyable.
+                </p>
+                
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <!-- Replace with actual team member photo -->
+                            <div style="width: 100%; height: 100%; background-color: #4A90E2; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 80px; color: white;"></i>
+                            </div>
+                        </div>
+                        <div class="team-info">
+                            <h3 class="team-name">Sarah Kim</h3>
+                            <p class="team-position">Founder & CEO</p>
+                            <p class="team-bio">
+                                With over 7 years of experience in Korean-English translation and foreign assistance, Sarah founded KoreAmigo to help foreigners navigate life in Korea with ease.
+                            </p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <!-- Replace with actual team member photo -->
+                            <div style="width: 100%; height: 100%; background-color: #50E3C2; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 80px; color: white;"></i>
+                            </div>
+                        </div>
+                        <div class="team-info">
+                            <h3 class="team-name">Min-ho Park</h3>
+                            <p class="team-position">Operations Director</p>
+                            <p class="team-bio">
+                                Min-ho brings 5+ years of experience in project management and customer service to ensure smooth operations and exceptional service delivery.
+                            </p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <!-- Replace with actual team member photo -->
+                            <div style="width: 100%; height: 100%; background-color: #FFD166; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 80px; color: white;"></i>
+                            </div>
+                        </div>
+                        <div class="team-info">
+                            <h3 class="team-name">Jessica Chen</h3>
+                            <p class="team-position">Customer Relations Manager</p>
+                            <p class="team-bio">
+                                Fluent in English, Korean, and Chinese, Jessica specializes in understanding and addressing the diverse needs of our international clients.
+                            </p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card">
+                        <div class="team-photo">
+                            <!-- Replace with actual team member photo -->
+                            <div style="width: 100%; height: 100%; background-color: #F25F5C; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-user" style="font-size: 80px; color: white;"></i>
+                            </div>
+                        </div>
+                        <div class="team-info">
+                            <h3 class="team-name">David Lee</h3>
+                            <p class="team-position">Technology Director</p>
+                            <p class="team-bio">
+                                With a background in IT and AI, David leads our technological initiatives to create intuitive and effective digital solutions for our clients.
+                            </p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="timeline-section">
+            <div class="container">
+                <h2 class="section-title">Our Journey</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item timeline-left">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2023</div>
+                            <h3 class="timeline-title">The Beginning</h3>
+                            <p>KoreAmigo was founded with a vision to help foreigners navigate life in Korea. Initial research and market analysis conducted.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-right">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2024</div>
+                            <h3 class="timeline-title">MVP Launch</h3>
+                            <p>Launched our minimal viable product with core services including housing support, visa assistance, and healthcare guidance.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-left">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2024</div>
+                            <h3 class="timeline-title">First 1,000 Users</h3>
+                            <p>Reached our first milestone of 1,000 registered users, and expanded our service offerings based on user feedback.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-right">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2025</div>
+                            <h3 class="timeline-title">Technology Integration</h3>
+                            <p>Introduced AI-powered translation features and expanded our digital platform capabilities to better serve our growing community.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-left">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2025</div>
+                            <h3 class="timeline-title">Present Day</h3>
+                            <p>Now serving thousands of foreigners in Korea with a comprehensive suite of support services and community resources.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>KoreAmigo</h2>
+                    <p>Your Friend in Korea</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 KoreAmigo. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html> 

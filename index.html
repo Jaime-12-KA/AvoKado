@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KoreAmigo - Support for Foreigners in Korea</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 랜딩 페이지 특화 스타일 */
+        .hero {
+            padding: 150px 0 80px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .nationality-selector {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 30px;
+            color: var(--text-color);
+        }
+
+        .nationality-selector h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .nationality-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .nationality-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nationality-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nationality-item img, .nationality-item i {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+            font-size: 40px;
+            color: var(--primary-color);
+        }
+
+        .features-section {
+            padding: 80px 0;
+            background-color: var(--light-bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(74, 144, 226, 0.1);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon i {
+            font-size: 35px;
+            color: var(--primary-color);
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .testimonials-section {
+            padding: 80px 0;
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            text-align: center;
+            margin: 0 15px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .testimonial-text:before,
+        .testimonial-text:after {
+            content: '"';
+            font-size: 50px;
+            color: var(--primary-color);
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .testimonial-text:before {
+            top: -20px;
+            left: 0;
+        }
+
+        .testimonial-text:after {
+            bottom: -40px;
+            right: 0;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .cta-section {
+            padding: 80px 0;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .btn-light {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .btn-light:hover {
+            background-color: #f0f0f0;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>KoreAmigo</h1>
+                </a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="lang-selector">
+                    <button id="lang-selector-btn">
+                        <i class="fas fa-globe"></i> Language
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <div class="lang-option" data-lang="en">English</div>
+                        <div class="lang-option" data-lang="ko">한국어</div>
+                        <div class="lang-option" data-lang="zh">中文</div>
+                        <div class="lang-option" data-lang="ja">日本語</div>
+                        <div class="lang-option" data-lang="vi">Tiếng Việt</div>
+                        <div class="lang-option" data-lang="th">ไทย</div>
+                    </div>
+                </div>
+            </nav>
+            <div class="mobile-nav-toggle" id="mobile-nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Your Friend in Korea</h1>
+                    <p class="hero-subtitle">Comprehensive support for foreigners living in or visiting Korea - Breaking language barriers and simplifying your Korean experience</p>
+                    <div class="hero-cta">
+                        <div class="nationality-selector">
+                            <h3>Choose Your Nationality</h3>
+                            <div class="nationality-grid">
+                                <div class="nationality-item" data-country="us">
+                                    <img src="assets/images/flags/us.svg" alt="USA">
+                                    <span>USA</span>
+                                </div>
+                                <div class="nationality-item" data-country="cn">
+                                    <img src="assets/images/flags/cn.svg" alt="China">
+                                    <span>China</span>
+                                </div>
+                                <div class="nationality-item" data-country="jp">
+                                    <img src="assets/images/flags/jp.svg" alt="Japan">
+                                    <span>Japan</span>
+                                </div>
+                                <div class="nationality-item" data-country="vn">
+                                    <img src="assets/images/flags/vn.svg" alt="Vietnam">
+                                    <span>Vietnam</span>
+                                </div>
+                                <div class="nationality-item" data-country="th">
+                                    <img src="assets/images/flags/th.svg" alt="Thailand">
+                                    <span>Thailand</span>
+                                </div>
+                                <div class="nationality-item" data-country="other">
+                                    <i class="fas fa-globe"></i>
+                                    <span>Other</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="container">
+                <h2 class="section-title">Why Choose KoreAmigo</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3 class="feature-title">Multilingual Support</h3>
+                        <p>Our team speaks multiple languages including English, Korean, Chinese, Japanese, Vietnamese, and Thai to ensure clear communication.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <h3 class="feature-title">Experienced Team</h3>
+                        <p>Our team consists of professionals with years of experience helping foreigners navigate life in Korea.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="feature-title">24/7 Availability</h3>
+                        <p>Premium members enjoy around-the-clock support for emergencies, ensuring help is always available when you need it most.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3>Housing Support</h3>
+                        <p>Find apartments and navigate rental contracts without the language barrier</p>
+                        <a href="services.html" class="btn btn-sm">Learn More</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Visa & Documentation</h3>
+                        <p>Get help with visa applications, renewals, and official documentation</p>
+                        <a href="services.html" class="btn btn-sm">Learn More</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Healthcare Assistance</h3>
+                        <p>Medical translation, hospital appointments, and insurance guidance</p>
+                        <a href="services.html" class="btn btn-sm">Learn More</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Education Support</h3>
+                        <p>School enrollment assistance and language learning opportunities</p>
+                        <a href="services.html" class="btn btn-sm">Learn More</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Employment Assistance</h3>
+                        <p>Job search guidance, resume translation, and workplace culture orientation</p>
+                        <a href="services.html" class="btn btn-sm">Learn More</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Daily Life Support</h3>
+                        <p>Help with banking, transportation, shopping, and cultural adaptation</p>
+                        <a href="services.html" class="btn btn-sm">Learn More</a>
+                    </div>
+                </div>
+                <div class="text-center" style="margin-top: 40px;">
+                    <a href="services.html" class="btn btn-primary">View All Services</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials-section">
+            <div class="container">
+                <h2 class="section-title">What Our Clients Say</h2>
+                <div class="testimonials-slider">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">KoreAmigo made my transition to Korea incredibly smooth. Their housing support saved me from many potential pitfalls in finding an apartment and understanding the lease terms.</p>
+                        <p class="testimonial-author">- James Davidson, USA</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">Ready to Simplify Your Korean Experience?</h2>
+                    <p class="cta-text">Join KoreAmigo today and discover how easy life in Korea can be with the right support.</p>
+                    <div class="cta-buttons">
+                        <a href="pricing.html" class="btn btn-light">View Pricing</a>
+                        <a href="#contact" class="btn btn-outline">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About KoreAmigo</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="assets/images/about-image.jpg" alt="KoreAmigo Team">
+                    </div>
+                    <div class="about-text">
+                        <p>KoreAmigo was founded with a simple mission: to help foreigners navigate life in Korea with ease and confidence. We understand the challenges of living in a foreign country and provide customized support services to make your Korean experience enjoyable and stress-free.</p>
+                        <p>Our multilingual team consists of locals and expats who are passionate about cultural exchange and dedicated to bridging gaps between different cultures.</p>
+                        <a href="about.html" class="btn btn-primary" style="margin-top: 20px;">Learn More About Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Contact Us</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>123 Sejong-daero, Jongno-gu, Seoul, South Korea</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <p>+82 10-1234-5678</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <p>info@koreamigo.com</p>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <select id="nationality">
+                                <option value="">Select Your Nationality</option>
+                                <option value="us">United States</option>
+                                <option value="cn">China</option>
+                                <option value="jp">Japan</option>
+                                <option value="vn">Vietnam</option>
+                                <option value="th">Thailand</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>KoreAmigo</h2>
+                    <p>Your Friend in Korea</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 KoreAmigo. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html> 

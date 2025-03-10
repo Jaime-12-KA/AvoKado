@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - KoreAmigo</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 서비스 페이지 특화 스타일 */
+        .service-detail {
+            padding: 120px 0 80px;
+        }
+
+        .service-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-detail-item {
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .service-detail-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-detail-image {
+            height: 200px;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-detail-image i {
+            font-size: 70px;
+            color: white;
+        }
+
+        .service-detail-content {
+            padding: 30px;
+        }
+
+        .service-detail-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .service-detail-text {
+            margin-bottom: 20px;
+            color: var(--light-text);
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .service-features li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .service-features li:before {
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .service-cta {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .testimonial-section {
+            background-color: var(--light-bg);
+            padding: 80px 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card {
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .testimonial-quote:before {
+            content: "\201C";
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.3;
+            position: absolute;
+            top: 0;
+            left: 20px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .testimonial-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-info p {
+            margin: 0;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>KoreAmigo</h1>
+                </a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="lang-selector">
+                    <button id="lang-selector-btn">
+                        <i class="fas fa-globe"></i> Language
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <div class="lang-option" data-lang="en">English</div>
+                        <div class="lang-option" data-lang="ko">한국어</div>
+                        <div class="lang-option" data-lang="zh">中文</div>
+                        <div class="lang-option" data-lang="ja">日本語</div>
+                        <div class="lang-option" data-lang="vi">Tiếng Việt</div>
+                        <div class="lang-option" data-lang="th">ไทย</div>
+                    </div>
+                </div>
+            </nav>
+            <div class="mobile-nav-toggle" id="mobile-nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="service-detail">
+            <div class="container">
+                <h2 class="section-title">Our Comprehensive Services</h2>
+                <p class="text-center" style="max-width: 800px; margin: 0 auto 40px;">
+                    KoreAmigo provides a wide range of services to help foreigners navigate life in Korea with ease and confidence. Our services are designed to overcome language barriers, cultural differences, and administrative complexities.
+                </p>
+                
+                <div class="service-detail-grid">
+                    <div class="service-detail-item">
+                        <div class="service-detail-image">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="service-detail-content">
+                            <h3 class="service-detail-title">Housing Support</h3>
+                            <p class="service-detail-text">
+                                Finding the right place to live and managing housing contracts can be challenging in Korea. Our housing support services help you navigate the entire process from search to move-in.
+                            </p>
+                            <ul class="service-features">
+                                <li>Property search assistance based on your requirements</li>
+                                <li>Contract translation and explanation</li>
+                                <li>Negotiation with landlords/agents</li>
+                                <li>Accompaniment to property viewings</li>
+                                <li>Utility setup assistance (electricity, water, gas, internet)</li>
+                                <li>Move-in/move-out support</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="service-detail-item">
+                        <div class="service-detail-image">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="service-detail-content">
+                            <h3 class="service-detail-title">Visa & Documentation</h3>
+                            <p class="service-detail-text">
+                                Navigating Korean immigration requirements and administrative procedures can be complex. We provide expert assistance for all your documentation needs.
+                            </p>
+                            <ul class="service-features">
+                                <li>Visa application and renewal guidance</li>
+                                <li>Document preparation and translation</li>
+                                <li>Alien Registration Card (ARC) application support</li>
+                                <li>Document certification and notarization assistance</li>
+                                <li>Accompaniment to immigration office visits</li>
+                                <li>Tax documentation support for foreigners</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="service-detail-item">
+                        <div class="service-detail-image">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="service-detail-content">
+                            <h3 class="service-detail-title">Healthcare Assistance</h3>
+                            <p class="service-detail-text">
+                                Accessing healthcare in Korea can be intimidating due to language barriers. Our healthcare assistance ensures you receive proper medical care when needed.
+                            </p>
+                            <ul class="service-features">
+                                <li>Medical appointment scheduling</li>
+                                <li>Hospital/clinic accompaniment and interpretation</li>
+                                <li>Medical document and prescription translation</li>
+                                <li>Health insurance registration and claims support</li>
+                                <li>Emergency medical assistance (24/7)</li>
+                                <li>Telemedicine support for remote consultations</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="service-detail-item">
+                        <div class="service-detail-image">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="service-detail-content">
+                            <h3 class="service-detail-title">Education Support</h3>
+                            <p class="service-detail-text">
+                                Whether you're a student or a parent looking for educational opportunities in Korea, we provide comprehensive support for your educational journey.
+                            </p>
+                            <ul class="service-features">
+                                <li>School/university application assistance</li>
+                                <li>Education document translation and certification</li>
+                                <li>School registration and enrollment support</li>
+                                <li>Parent-teacher communication assistance</li>
+                                <li>Korean language learning resources and programs</li>
+                                <li>Educational counseling for international students</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="service-detail-item">
+                        <div class="service-detail-image">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="service-detail-content">
+                            <h3 class="service-detail-title">Employment Assistance</h3>
+                            <p class="service-detail-text">
+                                Looking for job opportunities in Korea? Our employment assistance services help you navigate the Korean job market effectively.
+                            </p>
+                            <ul class="service-features">
+                                <li>Resume/CV translation and optimization</li>
+                                <li>Job search guidance for foreigners</li>
+                                <li>Interview preparation and coaching</li>
+                                <li>Work contract review and explanation</li>
+                                <li>Employment documentation assistance</li>
+                                <li>Workplace culture orientation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="service-detail-item">
+                        <div class="service-detail-image">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <div class="service-detail-content">
+                            <h3 class="service-detail-title">Daily Life Support</h3>
+                            <p class="service-detail-text">
+                                Day-to-day activities can present unexpected challenges. Our daily life support services help you handle various aspects of living in Korea.
+                            </p>
+                            <ul class="service-features">
+                                <li>Banking and financial services assistance</li>
+                                <li>Mobile phone/Internet setup</li>
+                                <li>Shopping and delivery services assistance</li>
+                                <li>Transportation guidance and travel planning</li>
+                                <li>Emergency support (24/7)</li>
+                                <li>Cultural adaptation guidance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-cta">
+                    <h3>Need a customized service package?</h3>
+                    <p>Contact us to create a personalized solution that meets your specific needs in Korea.</p>
+                    <a href="index.html#contact" class="btn btn-primary">Contact Us</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonial-section">
+            <div class="container">
+                <h2 class="section-title">What Our Clients Say</h2>
+                
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">
+                            KoreAmigo made my transition to Korea incredibly smooth. Their housing support saved me from many potential pitfalls in finding an apartment and understanding the lease terms.
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">JD</div>
+                            <div class="testimonial-info">
+                                <h4>James Davidson</h4>
+                                <p>Marketing Professional from USA</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">
+                            I needed help with medical translation during an emergency, and KoreAmigo responded within minutes. Their healthcare assistance service is truly lifesaving!
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">LW</div>
+                            <div class="testimonial-info">
+                                <h4>Liu Wei</h4>
+                                <p>International Student from China</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">
+                            The visa renewal process seemed daunting, but with KoreAmigo's documentation assistance, everything went perfectly. I highly recommend their services to all expats.
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">SP</div>
+                            <div class="testimonial-info">
+                                <h4>Sophie Patel</h4>
+                                <p>Software Engineer from India</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>KoreAmigo</h2>
+                    <p>Your Friend in Korea</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 KoreAmigo. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html> 

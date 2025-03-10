@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - KoreAmigo</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 가격 페이지 특화 스타일 */
+        .pricing-hero {
+            padding: 150px 0 80px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/pricing-hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        .pricing-hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .pricing-hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .pricing-tabs {
+            display: flex;
+            justify-content: center;
+            max-width: 300px;
+            margin: 0 auto 50px;
+            background-color: #f5f5f5;
+            border-radius: 30px;
+            padding: 5px;
+        }
+
+        .pricing-tab {
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .pricing-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .pricing-plans-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .pricing-plan {
+            flex: 1 1 300px;
+            max-width: 350px;
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .pricing-plan:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-plan.featured {
+            border: 2px solid var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .pricing-plan.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .pricing-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(74, 144, 226, 0.1);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pricing-icon i {
+            font-size: 40px;
+            color: var(--primary-color);
+        }
+
+        .pricing-plan-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .pricing-plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .pricing-plan-period {
+            color: var(--light-text);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .pricing-features li:before {
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .pricing-features li.not-included {
+            color: var(--light-text);
+            text-decoration: line-through;
+        }
+
+        .pricing-features li.not-included:before {
+            content: "\f00d";
+            color: #ddd;
+        }
+
+        .pricing-cta {
+            margin-top: auto;
+        }
+
+        .faq-section {
+            padding: 80px 0;
+            background-color: var(--light-bg);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 40px auto 0;
+        }
+
+        .faq-item {
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            color: var(--primary-color);
+        }
+
+        .faq-question i {
+            transition: var(--transition);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--primary-color);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+
+        .custom-plan {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .custom-plan-content {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 40px;
+        }
+
+        .custom-plan-content h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .custom-plan-content p {
+            margin-bottom: 30px;
+            color: var(--light-text);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>KoreAmigo</h1>
+                </a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="pricing.html" class="active">Pricing</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="lang-selector">
+                    <button id="lang-selector-btn">
+                        <i class="fas fa-globe"></i> Language
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <div class="lang-option" data-lang="en">English</div>
+                        <div class="lang-option" data-lang="ko">한국어</div>
+                        <div class="lang-option" data-lang="zh">中文</div>
+                        <div class="lang-option" data-lang="ja">日本語</div>
+                        <div class="lang-option" data-lang="vi">Tiếng Việt</div>
+                        <div class="lang-option" data-lang="th">ไทย</div>
+                    </div>
+                </div>
+            </nav>
+            <div class="mobile-nav-toggle" id="mobile-nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="pricing-hero">
+            <div class="container">
+                <h1 class="pricing-hero-title">Simple & Transparent Pricing</h1>
+                <p class="pricing-hero-subtitle">Choose the plan that fits your needs and budget. All plans include access to our essential services.</p>
+            </div>
+        </section>
+
+        <section class="pricing-plans">
+            <div class="container">
+                <h2 class="section-title">Our Membership Plans</h2>
+                
+                <div class="pricing-tabs">
+                    <div class="pricing-tab active" id="monthly-tab">Monthly</div>
+                    <div class="pricing-tab" id="annual-tab">Annual</div>
+                </div>
+                
+                <div class="pricing-plans-container" id="monthly-plans">
+                    <div class="pricing-plan">
+                        <div class="pricing-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h3 class="pricing-plan-title">Basic</h3>
+                        <div class="pricing-plan-price">Free</div>
+                        <span class="pricing-plan-period">Forever</span>
+                        
+                        <ul class="pricing-features">
+                            <li>Essential information resources</li>
+                            <li>Community forum access</li>
+                            <li>Basic translation tools</li>
+                            <li class="not-included">Personalized assistance</li>
+                            <li class="not-included">Document translations</li>
+                            <li class="not-included">Service accompaniment</li>
+                            <li class="not-included">Emergency support</li>
+                        </ul>
+                        
+                        <div class="pricing-cta">
+                            <a href="#" class="btn btn-primary">Sign Up for Free</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-plan">
+                        <div class="pricing-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3 class="pricing-plan-title">Standard</h3>
+                        <div class="pricing-plan-price">39,000₩</div>
+                        <span class="pricing-plan-period">per month</span>
+                        
+                        <ul class="pricing-features">
+                            <li>All Basic features</li>
+                            <li>Document translation (up to 5 pages/month)</li>
+                            <li>Phone support during business hours</li>
+                            <li>Administrative assistance</li>
+                            <li>Service accompaniment (2 hours/month)</li>
+                            <li class="not-included">Emergency 24/7 support</li>
+                            <li class="not-included">Personalized concierge service</li>
+                        </ul>
+                        
+                        <div class="pricing-cta">
+                            <a href="#" class="btn btn-primary">Get Started</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-plan featured">
+                        <div class="pricing-badge">Most Popular</div>
+                        <div class="pricing-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3 class="pricing-plan-title">Premium</h3>
+                        <div class="pricing-plan-price">99,000₩</div>
+                        <span class="pricing-plan-period">per month</span>
+                        
+                        <ul class="pricing-features">
+                            <li>All Standard features</li>
+                            <li>Advanced translation services</li>
+                            <li>Administrative services (8 hours/month)</li>
+                            <li>Accompaniment service (4 hours/month)</li>
+                            <li>VIP cultural experiences</li>
+                            <li>Emergency 24/7 support</li>
+                            <li>Personalized concierge service</li>
+                        </ul>
+                        
+                        <div class="pricing-cta">
+                            <a href="#" class="btn btn-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pricing-plans-container" id="annual-plans" style="display: none;">
+                    <div class="pricing-plan">
+                        <div class="pricing-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h3 class="pricing-plan-title">Basic</h3>
+                        <div class="pricing-plan-price">Free</div>
+                        <span class="pricing-plan-period">Forever</span>
+                        
+                        <ul class="pricing-features">
+                            <li>Essential information resources</li>
+                            <li>Community forum access</li>
+                            <li>Basic translation tools</li>
+                            <li class="not-included">Personalized assistance</li>
+                            <li class="not-included">Document translations</li>
+                            <li class="not-included">Service accompaniment</li>
+                            <li class="not-included">Emergency support</li>
+                        </ul>
+                        
+                        <div class="pricing-cta">
+                            <a href="#" class="btn btn-primary">Sign Up for Free</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-plan">
+                        <div class="pricing-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3 class="pricing-plan-title">Standard</h3>
+                        <div class="pricing-plan-price">390,000₩</div>
+                        <span class="pricing-plan-period">per year <span style="color: var(--secondary-color); font-weight: 600;">(Save 16%)</span></span>
+                        
+                        <ul class="pricing-features">
+                            <li>All Basic features</li>
+                            <li>Document translation (up to 5 pages/month)</li>
+                            <li>Phone support during business hours</li>
+                            <li>Administrative assistance</li>
+                            <li>Service accompaniment (2 hours/month)</li>
+                            <li class="not-included">Emergency 24/7 support</li>
+                            <li class="not-included">Personalized concierge service</li>
+                        </ul>
+                        
+                        <div class="pricing-cta">
+                            <a href="#" class="btn btn-primary">Get Started</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-plan featured">
+                        <div class="pricing-badge">Best Value</div>
+                        <div class="pricing-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3 class="pricing-plan-title">Premium</h3>
+                        <div class="pricing-plan-price">990,000₩</div>
+                        <span class="pricing-plan-period">per year <span style="color: var(--secondary-color); font-weight: 600;">(Save 16%)</span></span>
+                        
+                        <ul class="pricing-features">
+                            <li>All Standard features</li>
+                            <li>Advanced translation services</li>
+                            <li>Administrative services (8 hours/month)</li>
+                            <li>Accompaniment service (4 hours/month)</li>
+                            <li>VIP cultural experiences</li>
+                            <li>Emergency 24/7 support</li>
+                            <li>Personalized concierge service</li>
+                        </ul>
+                        
+                        <div class="pricing-cta">
+                            <a href="#" class="btn btn-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can I change my plan later?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, you can upgrade or downgrade your plan at any time. If you upgrade, the new pricing will take effect immediately. If you downgrade, the change will take effect at the start of your next billing cycle.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I calculate the hours included in my plan?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>The hours included in your plan refer to the total time our team spends providing direct assistance services for you, such as accompaniment to appointments, administrative procedures, or dedicated translation work. These hours are tracked in our system and reset at the beginning of each billing cycle.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What happens if I need more hours than my plan includes?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>If you need additional assistance beyond what your plan includes, you can purchase extra hours at our standard rate of 30,000₩ per hour. We'll always notify you before you exceed your plan's hours and provide options to either upgrade your plan or purchase additional hours.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Is there a contract or commitment period?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No, all our plans are subscription-based with no long-term contracts. You can cancel your subscription at any time. For monthly plans, you can cancel anytime before your next billing date. For annual plans, you can continue using the service until the end of your paid period.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Do you offer special rates for families or groups?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer family plans and group discounts for businesses or educational institutions. Family plans cover up to 4 family members living at the same address. For corporate or group plans, please contact us directly to discuss your specific needs and receive a customized quote.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="custom-plan">
+            <div class="container">
+                <div class="custom-plan-content">
+                    <h3>Need a Custom Solution?</h3>
+                    <p>If our standard plans don't meet your specific needs, we can create a tailored solution just for you. Whether you're a business looking for employee support, an educational institution, or have unique requirements, our team is ready to help.</p>
+                    <a href="index.html#contact" class="btn btn-primary">Contact Us for a Custom Quote</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>KoreAmigo</h2>
+                    <p>Your Friend in Korea</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 KoreAmigo. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        // 가격 탭 토글
+        document.addEventListener('DOMContentLoaded', function() {
+            const monthlyTab = document.getElementById('monthly-tab');
+            const annualTab = document.getElementById('annual-tab');
+            const monthlyPlans = document.getElementById('monthly-plans');
+            const annualPlans = document.getElementById('annual-plans');
+            
+            monthlyTab.addEventListener('click', function() {
+                monthlyTab.classList.add('active');
+                annualTab.classList.remove('active');
+                monthlyPlans.style.display = 'flex';
+                annualPlans.style.display = 'none';
+            });
+            
+            annualTab.addEventListener('click', function() {
+                annualTab.classList.add('active');
+                monthlyTab.classList.remove('active');
+                annualPlans.style.display = 'flex';
+                monthlyPlans.style.display = 'none';
+            });
+            
+            // FAQ Accordion
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
