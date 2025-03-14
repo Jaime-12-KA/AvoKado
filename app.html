@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyQuokka - 한국에서 외국인의 친구 (2023)</title>
+    <title>MyQuokka - 앱 소개</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -39,28 +39,6 @@
             text-align: center;
             margin-bottom: 40px;
         }
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-top: 50px;
-        }
-        .feature {
-            width: 30%;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-top: 3px solid #FF9F1C;
-            transition: transform 0.3s ease;
-        }
-        .feature:hover {
-            transform: translateY(-5px);
-        }
-        .feature h3 {
-            color: #FF6B6B;
-        }
         footer {
             background-color: #FFD166;
             color: #333;
@@ -69,9 +47,6 @@
             margin-top: 50px;
         }
         @media (max-width: 768px) {
-            .feature {
-                width: 100%;
-            }
             .nav-menu {
                 flex-direction: column;
             }
@@ -188,6 +163,98 @@
         .cta-button:hover {
             background-color: #FF8C00 !important;
         }
+
+        /* 앱 소개 페이지 스타일 */
+        .app-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+        .app-screenshot {
+            width: 30%;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .app-screenshot img {
+            width: 100%;
+            display: block;
+        }
+        .app-screenshot h3 {
+            background-color: #FF6B6B;
+            color: white;
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
+        .app-screenshot p {
+            padding: 15px;
+            background-color: white;
+        }
+        .app-features {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .feature-item {
+            width: 48%;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        .feature-item:nth-child(odd) {
+            margin-right: 4%;
+        }
+        .feature-item h3 {
+            color: #4ECDC4;
+            margin-top: 0;
+        }
+        .download-section {
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .download-button {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 15px 30px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .download-button:hover {
+            background-color: #555;
+        }
+        @media (max-width: 768px) {
+            .app-screenshot {
+                width: 100%;
+            }
+            .feature-item {
+                width: 100%;
+                margin-right: 0 !important;
+            }
+            .download-buttons {
+                flex-direction: column;
+            }
+            .download-button {
+                margin: 10px 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -209,10 +276,10 @@
         </div>
         <div class="nav-container">
             <ul class="nav-menu">
-                <li><a href="#" class="active">홈</a></li>
+                <li><a href="index.html">홈</a></li>
                 <li><a href="about.html">소개</a></li>
                 <li><a href="services.html">서비스</a></li>
-                <li><a href="app.html">앱</a></li>
+                <li><a href="app.html" class="active">앱</a></li>
                 <li><a href="pricing.html">요금제</a></li>
                 <li><a href="resources.html">자료실</a></li>
                 <li><a href="contact.html">문의하기</a></li>
@@ -223,39 +290,61 @@
 
     <div class="container">
         <div class="intro">
-            <p>MyQuokka는 한국에 거주하거나 방문하는 외국인을 위한 올인원 플랫폼입니다. 언어 장벽, 문화적 차이, 복잡한 행정 절차를 해소하고 한국 생활을 더 쉽고 풍요롭게 만들어 드립니다.</p>
+            <h2>MyQuokka 모바일 앱</h2>
+            <p>언제 어디서나 필요한 정보에 접근하고, 한국 생활의 모든 과정을 쉽게 관리하세요.</p>
+        </div>
+
+        <div class="app-showcase">
+            <div class="app-screenshot">
+                <h3>홈 화면</h3>
+                <p>주요 카테고리에 쉽게 접근하고, 원하는 정보를 빠르게 검색할 수 있습니다. 다국어 지원으로 선호하는 언어로 전환 가능합니다.</p>
+            </div>
+            <div class="app-screenshot">
+                <h3>카테고리 상세 화면</h3>
+                <p>각 카테고리별 상세 정보와 가이드를 제공합니다. 주거, 교통, 의료 등 필요한 모든 정보를 찾아보세요.</p>
+            </div>
+            <div class="app-screenshot">
+                <h3>콘텐츠 상세 화면</h3>
+                <p>상세한 정보와 실용적인 팁을 제공합니다. 언제든지 필요한 정보를 저장하거나 직접 문의할 수 있습니다.</p>
+            </div>
         </div>
 
         <h2>주요 기능</h2>
-        <div class="features">
-            <div class="feature">
-                <h3>정보 데이터베이스</h3>
-                <p>주거, 의료, 교육, 교통, 법률, 금융 등 필수 서비스에 대한 포괄적인 정보를 제공합니다.</p>
-            </div>
-            <div class="feature">
+        <div class="app-features">
+            <div class="feature-item">
                 <h3>다국어 지원</h3>
-                <p>영어, 중국어, 일본어, 베트남어 등 다양한 언어로 서비스를 제공합니다.</p>
+                <p>영어, 중국어, 일본어, 베트남어 등 7개 언어로 모든 콘텐츠를 제공합니다. 언어 장벽 없이 필요한 정보를 얻을 수 있습니다.</p>
             </div>
-            <div class="feature">
-                <h3>사용자 관리</h3>
-                <p>개인 프로필을 만들고 필요한 정보를 저장하고 관리할 수 있습니다.</p>
+            <div class="feature-item">
+                <h3>AI 번역 비서</h3>
+                <p>실시간 번역 기능으로 언어 소통에 어려움이 없습니다. 대화, 표지판, 문서 등을 즉시 번역해 드립니다.</p>
             </div>
-            <div class="feature">
-                <h3>티켓팅 시스템</h3>
-                <p>질문이나 도움이 필요한 사항을 제출하고 답변을 받을 수 있습니다.</p>
+            <div class="feature-item">
+                <h3>생활 정보 데이터베이스</h3>
+                <p>주거, 공과금, 교통, 주차, 일상생활, 언어, 행정절차, 의료서비스 등 한국 생활에 필요한 모든 정보를 담고 있습니다.</p>
             </div>
-            <div class="feature">
+            <div class="feature-item">
+                <h3>커뮤니티 Q&A</h3>
+                <p>비슷한 경험을 가진 다른 외국인들과 경험과 해결책을 공유할 수 있습니다. 언제든지 질문하고 답변을 받으세요.</p>
+            </div>
+            <div class="feature-item">
+                <h3>개인화된 경험</h3>
+                <p>자주 찾는 정보를 저장하고, 개인 맞춤형 추천을 받을 수 있습니다. 나에게 필요한 정보만 빠르게 찾을 수 있습니다.</p>
+            </div>
+            <div class="feature-item">
                 <h3>위치 기반 서비스</h3>
-                <p>내 주변의 필요한 서비스나 시설을 찾아볼 수 있습니다.</p>
-            </div>
-            <div class="feature">
-                <h3>알림 서비스</h3>
-                <p>중요한 기한, 일정, 업데이트에 대한 알림을 받을 수 있습니다.</p>
+                <p>내 주변의 병원, 관공서, 대중교통 등 필요한 장소를 쉽게 찾고 길 안내를 받을 수 있습니다.</p>
             </div>
         </div>
 
-        <h2>함께 해요</h2>
-        <p>MyQuokka는 한국에서 외국인들의 생활을 더 쉽고 풍요롭게 만들기 위해 노력하고 있습니다. 저희와 함께하여 외국인들에게 더 나은 경험을 제공해 보세요.</p>
+        <div class="download-section">
+            <h2>지금 바로 MyQuokka 앱을 다운로드하세요</h2>
+            <p>Google Play와 App Store에서 무료로 다운로드 가능합니다.</p>
+            <div class="download-buttons">
+                <a href="#" class="download-button">Google Play</a>
+                <a href="#" class="download-button">App Store</a>
+            </div>
+        </div>
     </div>
 
     <footer>
