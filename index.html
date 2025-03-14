@@ -73,11 +73,92 @@
                 width: 100%;
             }
         }
+        
+        /* 쿼카 로고 스타일 */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .quokka-logo {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        .quokka-face {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #f9d5a7;
+            border-radius: 50% 50% 45% 45%;
+            top: 10px;
+            left: 10px;
+        }
+        .quokka-ear-left, .quokka-ear-right {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #f9d5a7;
+            border-radius: 50%;
+        }
+        .quokka-ear-left {
+            top: 0;
+            left: 10px;
+        }
+        .quokka-ear-right {
+            top: 0;
+            right: 10px;
+        }
+        .quokka-eye-left, .quokka-eye-right {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #333;
+            border-radius: 50%;
+        }
+        .quokka-eye-left {
+            top: 30px;
+            left: 20px;
+        }
+        .quokka-eye-right {
+            top: 30px;
+            right: 20px;
+        }
+        .quokka-nose {
+            position: absolute;
+            width: 12px;
+            height: 8px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 40px;
+            left: 34px;
+        }
+        .quokka-mouth {
+            position: absolute;
+            width: 24px;
+            height: 10px;
+            border-bottom: 2px solid #333;
+            border-radius: 50%;
+            top: 45px;
+            left: 28px;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
+            <div class="logo-container">
+                <div class="quokka-logo">
+                    <div class="quokka-ear-left"></div>
+                    <div class="quokka-ear-right"></div>
+                    <div class="quokka-face"></div>
+                    <div class="quokka-eye-left"></div>
+                    <div class="quokka-eye-right"></div>
+                    <div class="quokka-nose"></div>
+                    <div class="quokka-mouth"></div>
+                </div>
+            </div>
             <h1>MyQuokka</h1>
             <p>한국에서 외국인의 친구</p>
         </div>
