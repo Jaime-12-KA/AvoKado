@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로컬인(Lokal.inn) UX/UI 디자인 소개</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+    
+    :root {
+      --primary: #3454D1;
+      --secondary: #34D1BF;
+      --accent: #FF6B6B;
+      --light: #F8F9FA;
+      --dark: #212529;
+      --gray: #ADB5BD;
+      --white: #FFFFFF;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    .slide-container {
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .slide {
+      background-color: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      padding: 40px;
+      margin-bottom: 40px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    
+    .slide:hover {
+      transform: translateY(-5px);
+    }
+    
+    .slide-header {
+      margin-bottom: 30px;
+      position: relative;
+    }
+    
+    .slide-header::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      margin-top: 15px;
+      border-radius: 2px;
+    }
+    
+    .slide-number {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.03);
+      z-index: 0;
+    }
+    
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      line-height: 1.3;
+      position: relative;
+      z-index: 1;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+    }
+    
+    h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    
+    p {
+      margin-bottom: 20px;
+      font-size: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .highlight {
+      color: var(--primary);
+      font-weight: 500;
+    }
+    
+    .text-center {
+      text-align: center;
+    }
+    
+    .grid {
+      display: grid;
+      grid-gap: 30px;
+    }
+    
+    .grid-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .grid-3 {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    .card {
+      background-color: var(--white);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      height: 100%;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-header {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--light);
+      border-radius: 12px;
+      margin-right: 15px;
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+    
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    
+    .tag {
+      display: inline-block;
+      padding: 5px 15px;
+      background-color: rgba(52, 84, 209, 0.1);
+      color: var(--primary);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 8px 15px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    
+    .feature-list {
+      list-style: none;
+    }
+    
+    .feature-list li {
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .feature-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      background-color: var(--secondary);
+      border-radius: 50%;
+    }
+    
+    .mobile-mockup {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .persona {
+      display: flex;
+      background: linear-gradient(to right, #ffffff, #f8f9fa);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+    
+    .persona-image {
+      width: 150px;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .persona-content {
+      padding: 25px;
+      flex-grow: 1;
+    }
+    
+    .persona-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .persona-title {
+      color: var(--gray);
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+    
+    .persona-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .persona-detail {
+      font-size: 0.9rem;
+    }
+    
+    .persona-detail strong {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
+    
+    .journey-map {
+      width: 100%;
+      overflow-x: auto;
+    }
+    
+    .journey-steps {
+      display: flex;
+      min-width: 650px;
+    }
+    
+    .journey-step {
+      flex: 1;
+      padding: 15px;
+      border-top: 3px solid var(--gray);
+      position: relative;
+      text-align: center;
+    }
+    
+    .journey-step.highlight {
+      border-top-color: var(--primary);
+    }
+    
+    .journey-step::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 14px;
+      background-color: var(--gray);
+      border-radius: 50%;
+    }
+    
+    .journey-step.highlight::before {
+      background-color: var(--primary);
+    }
+    
+    .journey-step-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    
+    .journey-step-desc {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+    
+    .wireframe {
+      background-color: #f1f3f5;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .wireframe-title {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: var(--dark);
+      text-align: center;
+    }
+    
+    .wireframe-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .feature-card {
+      background-color: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .feature-icon {
+      margin-right: 10px;
+      color: var(--primary);
+    }
+    
+    @media (max-width: 768px) {
+      .slide {
+        padding: 25px;
+      }
+      
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      .persona {
+        flex-direction: column;
+      }
+      
+      .persona-image {
+        height: 150px;
+        width: 100%;
+      }
+      
+      .persona-details {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <!-- 슬라이드 1: 타이틀 -->
+    <div class="slide">
+      <div class="slide-header">
+        <div class="slide-number">01</div>
+        <h1>로컬인 (Lokal.inn)</h1>
+      </div>
+      <p class="text-center">
+        <span class="badge">글로벌 커뮤니티 플랫폼</span>
+      </p>
+      <p style="font-size: 1.3rem; text-align: center; margin: 30px 0;">
+        <span class="highlight">"언어 장벽 없이 여행자와 현지인을 연결하는<br>다국어 커뮤니티 플랫폼"</span>
+      </p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Explorer</h3>
+          <p>여행자, 이주민, 특정 지역에 대한 정보를 찾는 사용자</p>
+        </div>
+        <div class="card">
+          <h3>Lokalist</h3>
+          <p>현지인, 장기 거주자, 지역 정보와 도움을 제공하는 사용자</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 슬라이드 2: 문제 정의 -->
+    <div class="slide">
+      <div class="slide-header">
+        <div class="slide-number">02</div>
+        <h2>문제 정의 및 기회</h2>
+      </div>
+      <div class="grid grid-2">
+        <div>
+          <h3>여행자/이주민이 겪는 어려움</h3>
+          <ul class="feature-list">
+            <li><strong>언어 장벽</strong> - 43.4%의 외국인이 주요 어려움으로 언급</li>
+            <li><strong>문화 차이</strong> - 27.8%가 현지 습관과 문화에 적응 어려움</li>
+            <li><strong>행정 절차 복잡성</strong> - 비자, 은행, 주거 계약 등의 복잡한 절차</li>
+            <li><strong>정보 접근성</strong> - 비공식적 지역 정보, 실생활 팁 접근 제한</li>
+            <li><strong>쇼핑 의사결정</strong> - 현지 제품 시장에서 가치 판단 어려움</li>
+          </ul>
+        </div>
+        <div>
+          <h3>기존 솔루션의 한계</h3>
+          <div class="card" style="margin-bottom: 20px;">
+            <h4>온라인 커뮤니티 (Reddit, Facebook)</h4>
+            <p>타겟팅 안 된 정보, 묻히는 글, 익명성으로 인한 신뢰 부족</p>
+            <p>번역이 불편하고 정보의 구조화 부재</p>
+          </div>
+          <div class="card">
+            <h4>현지 서비스 플랫폼</h4>
+            <p>외국인에게 높은 진입장벽, 언어/문화적 불편</p>
+            <p>외국인 사용성 고려 부족한 로컬 친화적 디자인</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 슬라이드 3: 핵심 가치 제안 -->
+    <div class="slide">
+      <div class="slide-header">
+        <div class="slide-number">03</div>
+        <h2>핵심 가치 제안</h2>
+      </div>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">💬</div>
+            <div class="card-title">언어 장벽 없는 소통</div>
+          </div>
+          <p>"한국어로 물어보고 전 세계 모든 답변을 바로 이해할 수 있어요"</p>
+          <p>"질문 한 번으로 현지인들에게 동시에 도움을 요청할 수 있어요"</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">🌟</div>
+            <div class="card-title">현지인의 실제 경험</div>
+          </div>
+          <p>"구글에서는 찾을 수 없는 현지인만의 생생한 팁"</p>
+          <p>"AI가 알려줄 수 없는 현지의 암묵적 지식"</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">🤝</div>
+            <div class="card-title">신뢰 기반 커뮤니티</div>
+          </div>
+          <p>"세상 어딜 가도 믿을 수 있는 현지인 친구가 있는 느낌"</p>
+          <p>"서로 도움 주고받는 글로벌 네트워크의 일원"</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">🗺️</div>
+            <div class="card-title">지역 특화 연결</div>
+          </div>
+          <p>"방문 전에도 그 지역 사람들과 미리 연결되는 경험"</p>
+          <p>"인터넷에 거의 없는 비주류 지역 정보도 구할 수 있어요"</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">🌍</div>
+            <div class="card-title">포용적 디지털 공간</div>
+          </div>
+          <p>"외롭지 않은 타지 생활의 시작"</p>
+          <p>"언어와 문화 차이를 넘어 진정한 교류가 일어나는 공간"</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">🛍️</div>
+            <div class="card-title">로컬 제품 큐레이션</div>
+          </div>
+          <p>"현지인이 실제로 사용하는 검증된 로컬 제품"</p>
+          <p>"현지인의 맥락 있는 설명과 추천으로 현명한 소비"</p>
+        </div>
+      </div>
+    </div>
+
+<!-- 슬라이드 4: 사용자 페르소나 - Explorer -->
+<div class="slide">
+  <div class="slide-header">
+    <div class="slide-number">04</div>
+    <h2>사용자 페르소나: Explorer</h2>
+  </div>
+  <div class="persona">
+    <div class="persona-image" style="display: flex; align-items: center; justify-content: center; background-color: #FF6B6B; border-radius: 50%; width: 150px; height: 150px;">
+      <span style="color: white; font-weight: bold; font-size: 64px;">S</span>
+    </div>
+    <div class="persona-content">
+      <div class="persona-name">Sarah Johnson</div>
+      <div class="persona-title">미국인 유학생, 25세</div>
+      <div class="persona-details">
+        <div class="persona-detail">
+          <strong>체류 목적</strong>
+          서울대학교 교환학생 (6개월)
+        </div>
+        <div class="persona-detail">
+          <strong>한국어 능력</strong>
+          초급 (기본 인사말과 간단한 문장)
+        </div>
+        <div class="persona-detail">
+          <strong>주요 어려움</strong>
+          문화적 차이, 지역 정보 부족, 언어 장벽
+        </div>
+        <div class="persona-detail">
+          <strong>테크 성향</strong>
+          새로운 앱 사용에 친숙, SNS 활발히 이용
+        </div>
+      </div>
+      <div>
+        <div class="tag">대중교통 이용 정보</div>
+        <div class="tag">학생 할인 정보</div>
+        <div class="tag">한국 친구 만들기</div>
+        <div class="tag">유학생 생활 꿀팁</div>
+      </div>
+      <p style="margin-top: 15px;">
+        <strong>목표:</strong> 언어 장벽 없이 현지 정보를 얻고, 한국 생활에 빠르게 적응하며, 현지인과 의미 있는 관계 형성
+      </p>
+    </div>
+  </div>
+  
+  <div class="journey-map">
+    <h3>Explorer의 사용자 여정</h3>
+    <div class="journey-steps">
+      <div class="journey-step">
+        <div class="journey-step-title">인지</div>
+        <div class="journey-step-desc">소셜 미디어나 친구 추천을 통해 로컬인 발견</div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-title">가입</div>
+        <div class="journey-step-desc">간편 가입 및 관심 지역/언어 설정</div>
+      </div>
+      <div class="journey-step highlight">
+        <div class="journey-step-title">질문 작성</div>
+        <div class="journey-step-desc">자신의 언어로 질문 작성</div>
+      </div>
+      <div class="journey-step highlight">
+        <div class="journey-step-title">답변 확인</div>
+        <div class="journey-step-desc">자동 번역된 현지인 답변 열람</div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-step-title">소통 및 감사</div>
+        <div class="journey-step-desc">도움 준 Lokalist에게 감사 표현</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 슬라이드 5: 사용자 페르소나 - Lokalist -->
+<div class="slide">
+  <div class="slide-header">
+    <div class="slide-number">05</div>
+    <h2>사용자 페르소나: Lokalist</h2>
+  </div>
+  <div class="persona">
+    <div class="persona-image" style="display: flex; align-items: center; justify-content: center; background-color: #3454D1; border-radius: 50%; width: 150px; height: 150px;">
+      <span style="color: white; font-weight: bold; font-size: 64px;">K</span>
+    </div>
+    <div class="persona-content">
+      <div class="persona-name">김민준</div>
+      <div class="persona-title">한국인 대학생, 23세</div>
+      <div class="persona-details">
+        <div class="persona-detail">
+          <strong>직업/상태</strong>
+          영어영문학과 대학생
+        </div>
+        <div class="persona-detail">
+          <strong>영어 능력</strong>
+          중상급 (해외 여행 및 유학 경험)
+        </div>
+        <div class="persona-detail">
+          <strong>참여 동기</strong>
+          외국어 연습, 글로벌 친구 만들기, 경험 공유
+        </div>
+        <div class="persona-detail">
+          <strong>가용 시간</strong>
+          주중 저녁 및 주말 시간 활용 가능
+        </div>
+      </div>
+      <div>
+        <div class="tag">외국어 연습</div>
+        <div class="tag">서울 현지 정보</div>
+        <div class="tag">대학가 문화</div>
+        <div class="tag">글로벌 경험 쌓기</div>
+      </div>
+      <p style="margin-top: 15px;">
+        <strong>목표:</strong> 외국어 실력 향상, 다양한 문화와 교류, 자신의 경험과 지식 공유, 글로벌 네트워킹
+      </p>
+    </div>
+  </div>      
+      <div class="journey-map">
+        <h3>Lokalist의 사용자 여정</h3>
+        <div class="journey-steps">
+          <div class="journey-step">
+            <div class="journey-step-title">발견</div>
+            <div class="journey-step-desc">대학 커뮤니티나 SNS 통해 플랫폼 발견</div>
+          </div>
+          <div class="journey-step">
+            <div class="journey-step-title">가입</div>
+            <div class="journey-step-desc">언어 능력 및 도움 가능 영역 설정</div>
+          </div>
+          <div class="journey-step highlight">
+            <div class="journey-step-title">질문 탐색</div>
+            <div class="journey-step-desc">자동 번역된 외국인 질문 확인</div>
+          </div>
+          <div class="journey-step highlight">
+            <div class="journey-step-title">답변 제공</div>
+            <div class="journey-step-desc">한국어로 답변 작성(자동 번역)</div>
+          </div>
+          <div class="journey-step">
+            <div class="journey-step-title">성장</div>
+            <div class="journey-step-desc">감사/호응 받고 인증 Lokalist로 성장</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 슬라이드 6: 핵심 기능 및 UX 요소 -->
+    <div class="slide">
+      <div class="slide-header">
+        <div class="slide-number">06</div>
+        <h2>핵심 기능 및 UX 요소</h2>
+      </div>
+      <div class="grid grid-2">
+        <div class="feature-card">
+          <h3><span class="feature-icon">🌐</span> 다국어 Q&A 포럼</h3>
+          <p>사용자가 모국어로 질문하고 답변을 작성하면 자동으로 번역되어 표시됩니다.</p>
+          <div class="tag">모국어 작성</div>
+          <div class="tag">실시간 번역</div>
+          <div class="tag">맥락 인식 번역</div>
+        </div>
+        <div class="feature-card">
+          <h3><span class="feature-icon">🔍</span> 개인화 피드</h3>
+          <p>사용자의 언어, 관심 지역, 이전 활동 기반으로 맞춤형 콘텐츠가 제공됩니다.</p>
+          <div class="tag">지역 기반 필터링</div>
+          <div class="tag">관심사 맞춤화</div>
+          <div class="tag">실시간 업데이트</div>
+        </div>
+        <div class="feature-card">
+          <h3><span class="feature-icon">👤</span> 프로필 시스템</h3>
+          <p>Explorer와 Lokalist 프로필에 언어 능력, 관심사, 전문 분야 표시</p>
+          <div class="tag">신뢰도 배지</div>
+          <div class="tag">활동 이력</div>
+          <div class="tag">역할 전환 기능</div>
+        </div>
+        <div class="feature-card">
+          <h3><span class="feature-icon">🎮</span> 게임화 요소</h3>
+          <p>참여와 기여를 촉진하는 레벨, 뱃지, 랭킹 시스템</p>
+          <div class="tag">레벨 시스템</div>
+          <div class="tag">활동 뱃지</div>
+          <div class="tag">월간 랭킹</div>
+        </div>
+      </div>
+      
+      <h3 style="margin-top: 30px;">감사/신뢰 시스템</h3>
+      <div class="grid grid-3">
+        <div class="card">
+          <h4>감사 기능</h4>
+          <p>유용한 답변에 감사 표현, 포인트 적립</p>
+        </div>
+        <div class="card">
+          <h4>후기 시스템</h4>
+          <p>서비스 품질에 대한 상세 피드백 제공</p>
+        </div>
+        <div class="card">
+          <h4>인증 Lokalist</h4>
+          <p>우수 활동자에게 인증 배지 부여</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로컬인(Lokal.inn) UX/UI 디자인 소개 - Part 2</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+    
+    :root {
+      --primary: #3454D1;
+      --secondary: #34D1BF;
+      --accent: #FF6B6B;
+      --light: #F8F9FA;
+      --dark: #212529;
+      --gray: #ADB5BD;
+      --white: #FFFFFF;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    .slide-container {
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .slide {
+      background-color: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      padding: 40px;
+      margin-bottom: 40px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    
+    .slide:hover {
+      transform: translateY(-5px);
+    }
+    
+    .slide-header {
+      margin-bottom: 30px;
+      position: relative;
+    }
+    
+    .slide-header::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      margin-top: 15px;
+      border-radius: 2px;
+    }
+    
+    .slide-number {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.03);
+      z-index: 0;
+    }
+    
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      line-height: 1.3;
+      position: relative;
+      z-index: 1;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+    }
+    
+    h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    
+    p {
+      margin-bottom: 20px;
+      font-size: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .highlight {
+      color: var(--primary);
+      font-weight: 500;
+    }
+    
+    .text-center {
+      text-align: center;
+    }
+    
+    .grid {
+      display: grid;
+      grid-gap: 30px;
+    }
+    
+    .grid-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .grid-3 {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    .card {
+      background-color: var(--white);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      height: 100%;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-header {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--light);
+      border-radius: 12px;
+      margin-right: 15px;
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+    
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    
+    .tag {
+      display: inline-block;
+      padding: 5px 15px;
+      background-color: rgba(52, 84, 209, 0.1);
+      color: var(--primary);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 8px 15px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    
+    .feature-list {
+      list-style: none;
+    }
+    
+    .feature-list li {
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .feature-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      background-color: var(--secondary);
+      border-radius: 50%;
+    }
+    
+    .mobile-mockup {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .wireframe {
+      background-color: #f1f3f5;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .wireframe-title {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: var(--dark);
+      text-align: center;
+    }
+    
+    .wireframe-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .wireframe-img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      border-radius: 8px;
+    }
+    
+    .feature-card {
+      background-color: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .feature-icon {
+      margin-right: 10px;
+      color: var(--primary);
+    }
+    
+    .step-container {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 40px;
+    }
+    
+    .step {
+      display: flex;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 30px;
+      left: 15px;
+      width: 2px;
+      height: calc(100% + 20px);
+      background-color: var(--gray);
+      z-index: 0;
+    }
+    
+    .step-number {
+      width: 30px;
+      height: 30px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 20px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .step-content {
+      flex-grow: 1;
+    }
+    
+    .step-title {
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .prototype {
+      border: 1px solid #dee2e6;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+    
+    .prototype-header {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-bottom: 1px solid #dee2e6;
+      display: flex;
+      align-items: center;
+    }
+    
+    .prototype-title {
+      font-weight: 700;
+      margin-left: 15px;
+    }
+    
+    .prototype-screen {
+      padding: 20px;
+      background-color: white;
+    }
+    
+    .prototype-nav {
+      display: flex;
+      background-color: var(--primary);
+      color: white;
+      padding: 10px;
+      justify-content: space-around;
+    }
+    
+    .prototype-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+    
+    .prototype-icon {
+      margin-bottom: 5px;
+      font-size: 1.2rem;
+    }
+    
+    .prototype-feed-item {
+      border-bottom: 1px solid #dee2e6;
+      padding: 15px 0;
+    }
+    
+    .prototype-user {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .prototype-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #e9ecef;
+      margin-right: 10px;
+    }
+    
+    .prototype-username {
+      font-weight: 700;
+    }
+    
+    .prototype-meta {
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    
+    .prototype-content {
+      margin-bottom: 10px;
+    }
+    
+    .prototype-actions {
+      display: flex;
+      font-size: 0.85rem;
+    }
+    
+    .prototype-action {
+      margin-right: 15px;
+      color: var(--gray);
+    }
+    
+    .phase-timeline {
+      display: flex;
+      margin: 30px 0;
+      position: relative;
+    }
+    
+    .phase-timeline::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: #e9ecef;
+      z-index: 0;
+    }
+    
+    .phase {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .phase-dot {
+      width: 16px;
+      height: 16px;
+      background-color: var(--gray);
+      border-radius: 50%;
+      margin: 12px auto 15px;
+    }
+    
+    .phase.active .phase-dot {
+      background-color: var(--primary);
+      width: 24px;
+      height: 24px;
+      margin: 8px auto 15px;
+    }
+    
+    .phase-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+    
+    .phase-desc {
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    
+    @media (max-width: 768px) {
+      .slide {
+        padding: 25px;
+      }
+      
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">  
+   <!-- 슬라이드 7: 와이어프레임 및 UX 플로우 -->
+<div class="slide">
+  <div class="slide-header">
+    <div class="slide-number">07</div>
+    <h2>와이어프레임 및 UX 플로우</h2>
+  </div>
+  
+  <h3>핵심 사용자 플로우</h3>
+  <div class="step-container">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <div class="step-title">가입 및 프로필 설정</div>
+        <p>사용자가 간편하게 가입하고, 사용 언어와 관심 지역을 설정합니다. Explorer/Lokalist 역할을 선택합니다.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <div class="step-title">질문 작성 (Explorer)</div>
+        <p>Explorer가 자신의 모국어로 질문을 작성하고, 지역과 카테고리를 선택합니다. 질문은 자동으로 현지 언어로 번역됩니다.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <div class="step-title">질문 확인 및 답변 (Lokalist)</div>
+        <p>Lokalist는 자신의 언어로 번역된 질문을 확인하고, 자신의 언어로 답변합니다.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <div class="step-title">번역된 답변 확인 (Explorer)</div>
+        <p>Explorer는 자신의 언어로 번역된 답변을 확인하고, 유용한 답변에 감사 기능으로 호응합니다.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <div class="step-title">커뮤니티 참여 확대</div>
+        <p>사용자는 지속적인 활동을 통해 레벨업하고, 다양한 기능을 사용할 수 있게 됩니다. Lokalist는 인증 배지를 받고 추가 혜택에 접근할 수 있습니다.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="grid grid-2">
+    <div class="wireframe">
+      <div class="wireframe-title">질문 작성 화면 와이어프레임</div>
+      <div class="wireframe-content">
+        <!-- 모바일 프레임으로 변경 -->
+        <div style="width: 280px; height: 480px; border: 2px solid #ccc; border-radius: 20px; background-color: #f9f9f9; margin: 0 auto; padding: 15px; position: relative; overflow: hidden;">
+          <!-- 상단바 -->
+          <div style="height: 50px; background-color: #e0e0e0; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 100px; height: 20px; background-color: #bdbdbd; border-radius: 5px;"></div>
+          </div>
+
+          <!-- 지역 선택 -->
+          <div style="height: 60px; background-color: #e0e0e0; border-radius: 10px; margin-bottom: 15px; padding: 10px;">
+            <div style="width: 150px; height: 15px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 10px;"></div>
+            <div style="display: flex; justify-content: space-between;">
+              <div style="width: 120px; height: 15px; background-color: #bdbdbd; border-radius: 3px;"></div>
+              <div style="width: 20px; height: 15px; background-color: #bdbdbd; border-radius: 3px;"></div>
+            </div>
+          </div>
+
+          <!-- 카테고리 선택 -->
+          <div style="height: 60px; background-color: #e0e0e0; border-radius: 10px; margin-bottom: 15px; padding: 10px;">
+            <div style="width: 150px; height: 15px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 10px;"></div>
+            <div style="display: flex; justify-content: space-between;">
+              <div style="width: 120px; height: 15px; background-color: #bdbdbd; border-radius: 3px;"></div>
+              <div style="width: 20px; height: 15px; background-color: #bdbdbd; border-radius: 3px;"></div>
+            </div>
+          </div>
+
+          <!-- 질문 입력 영역 -->
+          <div style="height: 180px; background-color: #e0e0e0; border-radius: 10px; margin-bottom: 15px; padding: 10px;">
+            <div style="width: 200px; height: 15px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 10px;"></div>
+            <div style="width: 240px; height: 15px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 10px;"></div>
+            <div style="width: 180px; height: 15px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 10px;"></div>
+          </div>
+
+          <!-- 번역 알림 -->
+          <div style="height: 40px; background-color: #d1e3ff; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 200px; height: 15px; background-color: #a4c2f4; border-radius: 3px;"></div>
+          </div>
+
+          <!-- 게시 버튼 -->
+          <div style="height: 50px; background-color: #3454D1; border-radius: 25px; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 100px; height: 15px; background-color: #ffffff; border-radius: 3px;"></div>
+          </div>
+        </div>
+        <p>사용자는 모국어로 질문을 작성하고, 카테고리와 지역을 선택합니다. 번역은 백엔드에서 자동으로 처리됩니다.</p>
+      </div>
+    </div>
+    <div class="wireframe">
+      <div class="wireframe-title">답변 화면 와이어프레임</div>
+      <div class="wireframe-content">
+        <!-- 모바일 프레임으로 변경 -->
+        <div style="width: 280px; height: 480px; border: 2px solid #ccc; border-radius: 20px; background-color: #f9f9f9; margin: 0 auto; padding: 15px; position: relative; overflow: hidden;">
+          <!-- 상단바 -->
+          <div style="height: 50px; background-color: #e0e0e0; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 120px; height: 20px; background-color: #bdbdbd; border-radius: 5px;"></div>
+          </div>
+
+          <!-- 질문 카드 -->
+          <div style="background-color: #e0e0e0; border-radius: 10px; margin-bottom: 15px; padding: 15px;">
+            <!-- 사용자 정보 -->
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+              <div style="width: 30px; height: 30px; background-color: #bdbdbd; border-radius: 50%; margin-right: 10px;"></div>
+              <div>
+                <div style="width: 80px; height: 12px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 5px;"></div>
+                <div style="width: 100px; height: 10px; background-color: #bdbdbd; border-radius: 3px;"></div>
+              </div>
+            </div>
+            <!-- 질문 내용 -->
+            <div style="width: 230px; height: 12px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 8px;"></div>
+            <div style="width: 210px; height: 12px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 8px;"></div>
+            <div style="width: 150px; height: 12px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 8px;"></div>
+            
+            <!-- 태그 -->
+            <div style="display: flex; margin-top: 10px;">
+              <div style="width: 60px; height: 20px; background-color: #d1e3ff; border-radius: 10px; margin-right: 10px;"></div>
+              <div style="width: 60px; height: 20px; background-color: #d1e3ff; border-radius: 10px;"></div>
+            </div>
+          </div>
+
+          <!-- 답변 섹션 헤더 -->
+          <div style="width: 100px; height: 20px; background-color: #bdbdbd; border-radius: 5px; margin-bottom: 15px;"></div>
+
+          <!-- 답변 카드 1 -->
+          <div style="background-color: #e0e0e0; border-radius: 10px; margin-bottom: 15px; padding: 15px;">
+            <!-- 답변자 정보 -->
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+              <div style="width: 30px; height: 30px; background-color: #bdbdbd; border-radius: 50%; margin-right: 10px;"></div>
+              <div>
+                <div style="width: 80px; height: 12px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 5px;"></div>
+                <div style="width: 60px; height: 10px; background-color: #bdbdbd; border-radius: 3px;"></div>
+              </div>
+            </div>
+            <!-- 답변 내용 -->
+            <div style="width: 230px; height: 12px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 8px;"></div>
+            <div style="width: 210px; height: 12px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 8px;"></div>
+            <div style="width: 190px; height: 12px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 15px;"></div>
+            
+            <!-- 액션 버튼 -->
+            <div style="display: flex;">
+              <div style="width: 80px; height: 15px; background-color: #bdbdbd; border-radius: 3px; margin-right: 15px;"></div>
+              <div style="width: 80px; height: 15px; background-color: #bdbdbd; border-radius: 3px;"></div>
+            </div>
+          </div>
+
+          <!-- 답변 카드 2 (부분만 보임) -->
+          <div style="background-color: #e0e0e0; border-radius: 10px; padding: 15px;">
+            <!-- 답변자 정보 -->
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+              <div style="width: 30px; height: 30px; background-color: #bdbdbd; border-radius: 50%; margin-right: 10px;"></div>
+              <div>
+                <div style="width: 80px; height: 12px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 5px;"></div>
+                <div style="width: 60px; height: 10px; background-color: #bdbdbd; border-radius: 3px;"></div>
+              </div>
+            </div>
+            <!-- 답변 내용 (일부만 보임) -->
+            <div style="width: 230px; height: 12px; background-color: #bdbdbd; border-radius: 3px; margin-bottom: 8px;"></div>
+            <div style="width: 210px; height: 12px; background-color: #bdbdbd; border-radius: 3px;"></div>
+          </div>
+        </div>
+        <p>답변은 자동으로 사용자의 언어로 번역되어 표시됩니다. 원문 보기와 번역 품질 평가 옵션이 제공됩니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    <!-- 슬라이드 8: 핵심 화면 프로토타입 -->
+    <div class="slide">
+      <div class="slide-header">
+        <div class="slide-number">08</div>
+        <h2>핵심 화면 프로토타입</h2>
+      </div>
+      
+      <div class="grid grid-2">
+        <div>
+          <div class="prototype">
+            <div class="prototype-header">
+              <div class="prototype-title">홈 피드 (Explorer)</div>
+            </div>
+            <div class="prototype-screen">
+              <div class="prototype-feed-item">
+                <div class="prototype-user">
+                  <div class="prototype-avatar"></div>
+                  <div>
+                    <div class="prototype-username">Sarah Johnson</div>
+                    <div class="prototype-meta">1시간 전 • 서울, 홍대</div>
+                  </div>
+                </div>
+                <div class="prototype-content">
+                  <p>홍대 근처에서 혼자 식사하기 좋은 식당 추천해주세요. 한국 전통 음식을 먹어보고 싶어요.</p>
+                  <div class="tag">음식</div>
+                  <div class="tag">홍대</div>
+                </div>
+                <div class="prototype-actions">
+                  <div class="prototype-action">💬 답변 5개</div>
+                  <div class="prototype-action">🔖 저장</div>
+                </div>
+              </div>
+              <div class="prototype-feed-item">
+                <div class="prototype-user">
+                  <div class="prototype-avatar"></div>
+                  <div>
+                    <div class="prototype-username">Carlos Rodriguez</div>
+                    <div class="prototype-meta">3시간 전 • 서울, 강남</div>
+                  </div>
+                </div>
+                <div class="prototype-content">
+                  <p>강남에서 외국인 등록증 신청하는 방법 알려주세요. 필요한 서류와 절차가 궁금합니다.</p>
+                  <div class="tag">행정</div>
+                  <div class="tag">강남</div>
+                </div>
+                <div class="prototype-actions">
+                  <div class="prototype-action">💬 답변 3개</div>
+                  <div class="prototype-action">🔖 저장</div>
+                </div>
+              </div>
+            </div>
+            <div class="prototype-nav">
+              <div class="prototype-nav-item">
+                <div class="prototype-icon">🏠</div>
+                <div>홈</div>
+              </div>
+              <div class="prototype-nav-item">
+                <div class="prototype-icon">🔍</div>
+                <div>탐색</div>
+              </div>
+              <div class="prototype-nav-item">
+                <div class="prototype-icon">✏️</div>
+                <div>질문하기</div>
+              </div>
+              <div class="prototype-nav-item">
+                <div class="prototype-icon">🔔</div>
+                <div>알림</div>
+              </div>
+              <div class="prototype-nav-item">
+                <div class="prototype-icon">👤</div>
+                <div>프로필</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="prototype">
+            <div class="prototype-header">
+              <div class="prototype-title">질문 상세 화면</div>
+            </div>
+            <div class="prototype-screen">
+              <div class="prototype-feed-item">
+                <div class="prototype-user">
+                  <div class="prototype-avatar"></div>
+                  <div>
+                    <div class="prototype-username">Sarah Johnson</div>
+                    <div class="prototype-meta">1시간 전 • 서울, 홍대</div>
+                  </div>
+                </div>
+                <div class="prototype-content">
+                  <p>홍대 근처에서 혼자 식사하기 좋은 식당 추천해주세요. 한국 전통 음식을 먹어보고 싶어요.</p>
+                  <div class="tag">음식</div>
+                  <div class="tag">홍대</div>
+                </div>
+              </div>
+              
+              <h4 style="margin: 20px 0 15px; font-size: 1.1rem;">답변 (5)</h4>
+              
+              <div class="prototype-feed-item">
+                <div class="prototype-user">
+                  <div class="prototype-avatar"></div>
+                  <div>
+                    <div class="prototype-username">김민준 <span class="badge" style="font-size: 0.7rem; padding: 3px 8px;">인증 Lokalist</span></div>
+                    <div class="prototype-meta">30분 전</div>
+                  </div>
+                </div>
+                <div class="prototype-content">
+                  <p>홍대 앞에 있는 '소문난 감자탕'을 추천해요. 혼자 식사하기 좋고 한국 전통 음식인 감자탕을 맛볼 수 있어요. 가격도 합리적이고 영어 메뉴판도 있습니다.</p>
+                </div>
+                <div class="prototype-actions">
+                  <div class="prototype-action">👍 도움됨 12</div>
+                  <div class="prototype-action">💬 댓글 2</div>
+                  <div class="prototype-action">🙏 감사하기</div>
+                </div>
+              </div>
+              
+              <div class="prototype-feed-item">
+                <div class="prototype-user">
+                  <div class="prototype-avatar"></div>
+                  <div>
+                    <div class="prototype-username">이지은</div>
+                    <div class="prototype-meta">15분 전</div>
+                  </div>
+                </div>
+                <div class="prototype-content">
+                  <p>'정가네 비빔밥'도 추천해요. 홍대입구역에서 5분 거리에 있고, 1인 메뉴가 많아요. 비빔밥은 한국의 대표적인 전통 음식이에요.</p>
+                </div>
+                <div class="prototype-actions">
+                  <div class="prototype-action">👍 도움됨 5</div>
+                  <div class="prototype-action">💬 댓글 0</div>
+                  <div class="prototype-action">🙏 감사하기</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="grid grid-2" style="margin-top: 30px;">
+        <div>
+          <div class="prototype">
+            <div class="prototype-header">
+              <div class="prototype-title">프로필 화면 (Lokalist)</div>
+            </div>
+            <div class="prototype-screen">
+              <div style="text-align: center; margin-bottom: 20px;">
+                <div style="width: 100px; height: 100px; border-radius: 50%; background-color: #e9ecef; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
+                  <span style="color: #3454D1; font-weight: bold; font-size: 42px;">K</span>
+                </div>
+                <h3 style="margin-bottom: 5px;">김민준</h3>
+                <p style="color: var(--gray); margin-bottom: 15px;">서울 • 영어, 한국어</p>
+                <div class="badge">인증 Lokalist</div>
+              </div>
+              
+              <div style="display: flex; justify-content: space-around; margin: 20px 0; text-align: center;">
+                <div>
+                  <div style="font-weight: 700; font-size: 1.5rem;">42</div>
+                  <div style="font-size: 0.9rem; color: var(--gray);">답변</div>
+                </div>
+                <div>
+                  <div style="font-weight: 700; font-size: 1.5rem;">31</div>
+                  <div style="font-size: 0.9rem; color: var(--gray);">감사</div>
+                </div>
+                <div>
+                  <div style="font-weight: 700; font-size: 1.5rem;">4</div>
+                  <div style="font-size: 0.9rem; color: var(--gray);">레벨</div>
+                </div>
+              </div>
+              
+              <div style="margin: 25px 0;">
+                <h4 style="margin-bottom: 15px; font-size: 1rem;">전문 분야</h4>
+                <div>
+                  <div class="tag">한식 요리</div>
+                  <div class="tag">대중교통</div>
+                  <div class="tag">홍대 문화</div>
+                  <div class="tag">대학 생활</div>
+                </div>
+              </div>
+              
+              <div>
+  <h4 style="margin-bottom: 15px; font-size: 1rem;">획득한 뱃지</h4>
+  <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+    <div style="text-align: center;">
+      <div style="width: 50px; height: 50px; margin-bottom: 5px;">
+        <!-- 친절한 안내자 배지 -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="50" height="50">
+          <circle cx="50" cy="50" r="48" fill="#f1f3f7" />
+          <circle cx="50" cy="50" r="42" fill="#ffffff" stroke="#3454D1" stroke-width="2" />
+          <!-- 나침반 아이콘 -->
+          <circle cx="50" cy="50" r="30" fill="#3454D1" opacity="0.1" />
+          <circle cx="50" cy="50" r="25" fill="#ffffff" stroke="#3454D1" stroke-width="1.5" />
+          <line x1="50" y1="30" x2="50" y2="70" stroke="#3454D1" stroke-width="1.5" />
+          <line x1="30" y1="50" x2="70" y2="50" stroke="#3454D1" stroke-width="1.5" />
+          <polygon points="50,25 47,32 53,32" fill="#FF6B6B" />
+          <text x="50" y="54" font-family="sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#3454D1">N</text>
+          <!-- 도움 손 아이콘 -->
+          <g transform="translate(65, 65) scale(0.3) rotate(-45)">
+            <path d="M10,30 Q15,10 30,15 Q40,5 50,15 Q60,10 70,20 Q75,35 60,40 L30,50 Q10,45 10,30 Z" fill="#FF6B6B" stroke="#3454D1" stroke-width="2" />
+            <path d="M30,15 L30,35 M40,10 L40,35 M50,15 L50,35 M60,20 L60,38" stroke="#3454D1" stroke-width="2" stroke-linecap="round" />
+          </g>
+        </svg>
+      </div>
+      <div style="font-size: 0.8rem;">친절한 안내자</div>
+    </div>
+    <div style="text-align: center;">
+      <div style="width: 50px; height: 50px; margin-bottom: 5px;">
+        <!-- 신속한 응답 배지 -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="50" height="50">
+          <circle cx="50" cy="50" r="48" fill="#f1f3f7" />
+          <circle cx="50" cy="50" r="42" fill="#ffffff" stroke="#34D1BF" stroke-width="2" />
+          <!-- 시계와 번개 -->
+          <circle cx="50" cy="50" r="30" fill="#34D1BF" opacity="0.1" />
+          <circle cx="50" cy="50" r="25" fill="#ffffff" stroke="#34D1BF" stroke-width="1.5" />
+          <line x1="50" y1="50" x2="50" y2="32" stroke="#34D1BF" stroke-width="2" stroke-linecap="round" />
+          <line x1="50" y1="50" x2="62" y2="50" stroke="#34D1BF" stroke-width="2" stroke-linecap="round" />
+          <line x1="50" y1="25" x2="50" y2="28" stroke="#34D1BF" stroke-width="1.5" />
+          <line x1="50" y1="72" x2="50" y2="75" stroke="#34D1BF" stroke-width="1.5" />
+          <line x1="25" y1="50" x2="28" y2="50" stroke="#34D1BF" stroke-width="1.5" />
+          <line x1="72" y1="50" x2="75" y2="50" stroke="#34D1BF" stroke-width="1.5" />
+          <path d="M67,35 L53,50 L60,50 L42,68 L45,53 L38,53 Z" fill="#FF6B6B" stroke="#34D1BF" stroke-width="1" />
+        </svg>
+      </div>
+      <div style="font-size: 0.8rem;">신속한 응답</div>
+    </div>
+    <div style="text-align: center;">
+      <div style="width: 50px; height: 50px; margin-bottom: 5px;">
+        <!-- 식도락 전문가 배지 -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="50" height="50">
+          <circle cx="50" cy="50" r="48" fill="#f1f3f7" />
+          <circle cx="50" cy="50" r="42" fill="#ffffff" stroke="#FF6B6B" stroke-width="2" />
+          <!-- 요리사 모자와 수저 -->
+          <circle cx="50" cy="50" r="30" fill="#FF6B6B" opacity="0.1" />
+          <path d="M30,55 Q30,40 50,35 Q70,40 70,55 L65,58 L35,58 Z" fill="#ffffff" stroke="#FF6B6B" stroke-width="1.5" />
+          <path d="M38,58 Q38,65 50,68 Q62,65 62,58" fill="none" stroke="#FF6B6B" stroke-width="1.5" />
+          <path d="M35,50 L32,60 M42,50 L39,60" stroke="#3454D1" stroke-width="1.5" stroke-linecap="round" />
+          <path d="M58,50 Q65,53 62,60" fill="none" stroke="#3454D1" stroke-width="1.5" stroke-linecap="round" />
+          <!-- 별점 -->
+          <polygon points="50,38 52,44 58,44 53,48 55,54 50,50 45,54 47,48 42,44 48,44" fill="#FFD700" stroke="#FF6B6B" stroke-width="0.5" />
+        </svg>
+      </div>
+      <div style="font-size: 0.8rem;">식도락 전문가</div>
+    </div>
+  </div>
+</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="prototype">
+            <div class="prototype-header">
+              <div class="prototype-title">Lokal Pick (큐레이션)</div>
+            </div>
+            <div class="prototype-screen">
+              <h3 style="margin-bottom: 15px; font-size: 1.1rem;">서울 현지인이 추천하는 제품</h3>
+              
+              <div style="margin-bottom: 20px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <div style="height: 150px; background: url('https://image.ajunews.com/content/image/2022/08/01/20220801094731782782.jpg'); background-size: cover;"></div>
+                <div style="padding: 15px;">
+                  <h4 style="font-size: 1rem; margin-bottom: 5px;">삼양 불닭볶음면</h4>
+                  <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 10px;">편의점 인기 라면</p>
+                  <p style="font-size: 0.85rem; margin-bottom: 10px;">한국 편의점에서 가장 인기 있는 매운 라면. 외국인들에게도 도전 음식으로 유명해요.</p>
+                  <div>
+                    <div class="tag">식품</div>
+                    <div class="tag">대표 한국 제품</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div style="margin-bottom: 20px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <div style="height: 150px; background: url('https://product-image.kurly.com/product/image/97c80382-1d1e-4472-aa8e-7db3cb0f1c05.jpg'); background-size: cover;"></div>
+                <div style="padding: 15px;">
+                  <h4 style="font-size: 1rem; margin-bottom: 5px;">이니스프리 화산송이 마스크</h4>
+                  <p style="font-size: 0.9rem; color: var(--gray); margin-bottom: 10px;">인기 화장품</p>
+                  <p style="font-size: 0.85rem; margin-bottom: 10px;">제주 화산송이로 만든 클렌징 마스크. 한국 여성들이 많이 사용하는 스킨케어 제품입니다.</p>
+                  <div>
+                    <div class="tag">뷰티</div>
+                    <div class="tag">한국 코스메틱</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 슬라이드 9: 개발 및 확장 계획 -->
+    <div class="slide">
+      <div class="slide-header">
+        <div class="slide-number">09</div>
+        <h2>개발 및 확장 계획</h2>
+      </div>
+      
+      <h3>단계별 개발 로드맵</h3>
+      <div class="phase-timeline">
+        <div class="phase active">
+          <div class="phase-dot"></div>
+          <div class="phase-title">1단계 (0-3개월)</div>
+          <div class="phase-desc">핵심 커뮤니티 MVP 구축</div>
+        </div>
+        <div class="phase">
+          <div class="phase-dot"></div>
+          <div class="phase-title">2단계 (3-6개월)</div>
+          <div class="phase-desc">로컬 콘텐츠 확장</div>
+        </div>
+        <div class="phase">
+          <div class="phase-dot"></div>
+          <div class="phase-title">3단계 (6-10개월)</div>
+          <div class="phase-desc">실용 기능 확장</div>
+        </div>
+        <div class="phase">
+          <div class="phase-dot"></div>
+          <div class="phase-title">4단계 (10개월+)</div>
+          <div class="phase-desc">글로벌 & 구조 고도화</div>
+        </div>
+      </div>
+      
+      <div class="grid grid-2">
+        <div>
+          <h3>1단계: 핵심 기능 (MVP)</h3>
+          <ul class="feature-list">
+            <li>다국어 Q&A 포럼 - 질문/답변 구조 구축</li>
+            <li>GPT API 활용 실시간 번역 시스템</li>
+            <li>Explorer/Lokalist 프로필 시스템</li>
+            <li>감사/후기 기반 신뢰 시스템</li>
+            <li>개인화된 피드 - 언어/지역 기반 콘텐츠</li>
+          </ul>
+        </div>
+        <div>
+          <h3>2단계: 콘텐츠 확장</h3>
+          <ul class="feature-list">
+            <li>Lokal Pick - 현지인 추천 제품/장소</li>
+            <li>도시별 정착 루트 및 생활 가이드</li>
+            <li>북마크/저장 기능</li>
+            <li>위키 아카이브 - 질문/답변 정보 축적</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="grid grid-2" style="margin-top: 30px;">
+        <div>
+          <h3>3단계: 실용 기능</h3>
+          <ul class="feature-list">
+            <li>외국인 중심 중고거래 게시판</li>
+            <li>구인구직/일거리 연결</li>
+            <li>유료 도움 요청 서비스</li>
+            <li>로컬 파트너 비즈니스 제휴</li>
+          </ul>
+        </div>
+        <div>
+          <h3>4단계: 글로벌 확장</h3>
+          <ul class="feature-list">
+            <li>Lokal World - 전 세계 도시 확장</li>
+            <li>커뮤니티 챌린지 시스템화</li>
+            <li>프리미엄 구독 모델</li>
+            <li>인증 Lokalist 유료화 옵션</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 슬라이드 10: UX 디자인 고려사항 -->
+    <div class="slide">
+      <div class="slide-header">
+        <div class="slide-number">10</div>
+        <h2>UX 디자인 고려사항</h2>
+      </div>
+      
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">🌐</div>
+            <div class="card-title">언어 장벽 해소</div>
+          </div>
+          <p>언어 전환이 자연스럽게 이루어지고, 번역 품질을 사용자가 평가할 수 있는 인터페이스</p>
+          <p>원문과 번역 간 쉬운 전환을 통해 효과적인 커뮤니케이션 지원</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">👥</div>
+            <div class="card-title">역할 전환 용이성</div>
+          </div>
+          <p>Explorer와 Lokalist 간 역할 전환이 직관적으로 이루어질 수 있는 UI</p>
+          <p>사용자가 상황에 따라 질문자/답변자 역할을 자연스럽게 바꿀 수 있도록 지원</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">🔍</div>
+            <div class="card-title">정보 접근성</div>
+          </div>
+          <p>사용자 니즈에 맞는 정보를 효과적으로 탐색할 수 있는 구조</p>
+          <p>지역/주제별 필터링, 검색 기능 강화로 원하는 정보에 빠르게 접근</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">🤝</div>
+            <div class="card-title">신뢰 시각화</div>
+          </div>
+          <p>사용자 신뢰도를 효과적으로 시각화하는 UI 요소</p>
+          <p>배지, 레벨, 후기 등을 통해 신뢰할 수 있는 정보원을 쉽게 식별</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">📱</div>
+            <div class="card-title">모바일 최적화</div>
+          </div>
+          <p>여행 중이나 이동 중에도 쉽게 사용할 수 있는 모바일 우선 디자인</p>
+          <p>오프라인 모드에서도 저장된 정보 접근 가능하도록 설계</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">🎮</div>
+            <div class="card-title">참여 촉진</div>
+          </div>
+          <p>사용자 참여를 유도하는 게임화 요소의 효과적 구현</p>
+          <p>기여에 대한 보상과 인정이 자연스럽게 이루어지는 인터페이스</p>
+        </div>
+      </div>
+      
+      <h3 style="margin-top: 40px;">디자인 원칙</h3>
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>다문화 포용성</h4>
+          <p>다양한 문화적 배경의 사용자들이 편안하게 사용할 수 있는 디자인을 위해:</p>
+          <ul style="padding-left: 20px; margin-bottom: 0;">
+            <li>문화적으로 중립적인 아이콘 및 시각 요소 사용</li>
+            <li>다양한 언어의 가독성을 고려한 타이포그래피</li>
+            <li>국가별 UI 관습 존중 (날짜 형식, 측정 단위 등)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>직관적 상호작용</h4>
+          <p>언어 장벽에도 불구하고 쉽게 이해할 수 있는 인터페이스를 위해:</p>
+          <ul style="padding-left: 20px; margin-bottom: 0;">
+            <li>보편적으로 이해 가능한 시각적 신호 활용</li>
+            <li>불필요한 복잡성 제거 및 단계별 안내</li>
+            <li>일관된 상호작용 패턴 유지</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 슬라이드 11: 마무리 -->
+    <div class="slide">
+      <div class="slide-header">
+        <div class="slide-number">11</div>
+        <h2>디자인 피드백 요청사항</h2>
+      </div>
+      
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>UX 측면 피드백</h3>
+          <ul style="padding-left: 20px; margin-bottom: 0;">
+            <li>다국어 UI 경험 및 사용자를 위한 번역 기능 최적화 방법</li>
+            <li>커뮤니티 신뢰 구축을 위한 UI 요소 제안</li>
+            <li>게임화 요소를 통한 참여 촉진 전략</li>
+            <li>사용자 역할 전환 UX 개선 방안</li>
+            <li>모바일 환경에서의 효과적인 정보 제공 방식</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>UI 측면 피드백</h3>
+          <ul style="padding-left: 20px; margin-bottom: 0;">
+            <li>다국어 지원을 위한 효과적인 레이아웃</li>
+            <li>글로벌 사용자를 위한 컬러 시스템 및 아이콘 체계</li>
+            <li>와이어프레임 및 프로토타입에 대한 디자인 개선점</li>
+            <li>다양한 디바이스에서의 최적화 전략</li>
+            <li>브랜드 아이덴티티 강화를 위한 디자인 요소</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="card" style="margin-top: 30px;">
+        <h3>핵심 질문</h3>
+        <p>1. 다국어 서비스의 UX 설계에서 가장 중요하게 고려해야 할 요소는 무엇인가요?</p>
+        <p>2. 사용자 간 신뢰를 구축하기 위한 디자인 전략으로 추가할 만한 것이 있을까요?</p>
+        <p>3. 모바일에서 사용자 생성 콘텐츠를 효과적으로 표시하는 최적의 방법은 무엇인가요?</p>
+        <p>4. 커뮤니티 참여를 유도하기 위한 게임화 요소 중 어떤 것이 가장 효과적일까요?</p>
+        <p>5. 글로벌 확장을 고려할 때, 디자인 시스템 구축에서 중점을 두어야 할 부분은 무엇인가요?</p>
+      </div>
+      
+      <div style="text-align: center; margin-top: 50px;">
+        <h2 style="margin-bottom: 20px;">감사합니다!</h2>
+        <p style="font-size: 1.2rem;">로컬인(Lokal.inn)에 대한 귀중한 피드백 부탁드립니다.</p>
+      </div>
+    </div>
+    
+  </div>
+</body>
+</html>
